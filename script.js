@@ -1,3 +1,17 @@
+// ── Google Analytics 4 ───────────────────────────────────
+(function () {
+  const GA_ID = "G-PQ6K3WBFSE";
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag("js", new Date());
+  gtag("config", GA_ID);
+})();
+
 const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 const mainNav = document.getElementById("mainNav");
 
@@ -53,6 +67,14 @@ if (trialForm) {
   trialForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const submitBtn = trialForm.querySelector("button[type='submit']");
+
+    // Fire GA4 lead event
+    if (typeof gtag === "function") {
+      gtag("event", "generate_lead", {
+        event_category: "Trial Form",
+        event_label: "Đăng ký tập thử",
+      });
+    }
 
     if (submitBtn) {
       const oldText = submitBtn.textContent;
