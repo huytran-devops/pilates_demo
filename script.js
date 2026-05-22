@@ -1,6 +1,6 @@
 // ── Google Analytics 4 ───────────────────────────────────
 (function () {
-  const GA_ID = "G-PQ6K3WBFSE";
+  const GA_ID = "G-8JG3CMCKQN";
   const s = document.createElement("script");
   s.async = true;
   s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
