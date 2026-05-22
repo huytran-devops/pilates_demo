@@ -112,6 +112,10 @@ const filterTabs = document.querySelectorAll(".filter-tab");
 const filterCards = document.querySelectorAll(".article-card[data-cat]");
 
 if (filterTabs.length > 0) {
+  // Immediately reveal the news section and all cards — no scroll trigger needed for a filterable grid
+  document.querySelectorAll(".news.reveal, .page-hero.reveal").forEach((el) => el.classList.add("visible"));
+  filterCards.forEach((card) => card.classList.add("visible"));
+
   filterTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       filterTabs.forEach((t) => t.classList.remove("is-active"));
@@ -119,7 +123,9 @@ if (filterTabs.length > 0) {
 
       const filter = tab.dataset.filter;
       filterCards.forEach((card) => {
-        card.style.display = filter === "all" || card.dataset.cat === filter ? "" : "none";
+        const show = filter === "all" || card.dataset.cat === filter;
+        card.style.display = show ? "" : "none";
+        if (show) card.classList.add("visible");
       });
     });
   });
