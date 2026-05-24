@@ -1,158 +1,274 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bài viết - Jee Pilates</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="bg-glow bg-glow--top"></div>
-    <div class="bg-glow bg-glow--bottom"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bài viết - Jee Pilates</title>
+  <meta name="description" content="Bài viết chi tiết từ Jee Pilates." />
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "surface":               "#fbf9f7",
+            "surface-dim":           "#dbdad8",
+            "surface-container-low": "#f5f3f1",
+            "surface-container":     "#efedec",
+            "surface-container-high":"#eae8e6",
+            "on-surface":            "#1b1c1b",
+            "on-surface-variant":    "#434843",
+            "outline-variant":       "#c3c8c0",
+            "on-primary-container":  "#f6fff4",
+            "sage-deep":             "#4A5D4C",
+            "sage-mid":              "#4d6150",
+            "warm-sand":             "#EAE3DB",
+            "charcoal-silk":         "#2D2D2D",
+            "soft-clay":             "#B5A496",
+            "secondary":             "#685c53",
+            "on-secondary-container":"#6e6258",
+          },
+          fontFamily: {
+            serif: ["Playfair Display", "Georgia", "serif"],
+            sans:  ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glass-nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    html { scroll-behavior: smooth; }
+    .nav-item-transition { transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.3s ease; }
+    .stagger-1 { transition-delay: 50ms; }
+    .stagger-2 { transition-delay: 100ms; }
+    .stagger-3 { transition-delay: 150ms; }
+    .stagger-4 { transition-delay: 200ms; }
+    .stagger-5 { transition-delay: 250ms; }
+    .submenu-enter { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+    .submenu-open { max-height: 500px; }
+    #mobileDrawer { transition: transform 0.5s cubic-bezier(0.2, 0, 0, 1); }
+    #mobileDrawer.drawer-closed { transform: translateX(-100%); }
+    /* Article body typography */
+    #articleBody p  { margin-bottom: 1.25rem; line-height: 1.8; color: #434843; }
+    #articleBody h3 { font-family: "Playfair Display", serif; font-size: 1.5rem; font-weight: 600; color: #4A5D4C; margin: 2rem 0 1rem; }
+    #articleBody h4 { font-family: "Playfair Display", serif; font-size: 1.25rem; font-weight: 600; color: #4A5D4C; margin: 1.5rem 0 0.75rem; }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-sans antialiased overflow-x-hidden">
+  <header class="fixed top-0 w-full z-50 bg-surface/80 glass-nav shadow-sm">
+    <div class="flex justify-between items-center px-6 py-4 max-w-screen-xl mx-auto">
+      <a href="index.html" class="font-serif text-xl font-semibold text-sage-deep leading-none no-underline">Jee Pilates</a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html#about" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Giới thiệu</a>
+        <a href="index.html#packages" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Gói tập</a>
+        <a href="index.html#studios" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Phòng tập</a>
+        <a href="index.html#gallery" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Không gian</a>
+        <a href="news.html" class="text-sm text-sage-deep font-semibold">Tin tức</a>
+      </nav>
+      <a href="index.html#trial" class="hidden md:inline-flex bg-sage-deep text-white px-6 py-2 rounded-full text-xs font-semibold tracking-widest uppercase hover:opacity-80 transition-opacity active:scale-95">Đăng ký tập thử</a>
+      <button class="md:hidden p-2 text-sage-deep hover:opacity-70 transition-opacity active:scale-95" onclick="openNav()" aria-label="Mở menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </header>
 
-    <header class="site-header" id="top">
-      <div class="container nav-wrap">
-        <a href="index.html" class="brand">
-          <span class="brand-mark">JEE</span>
-          <span class="brand-text">Jee Pilates</span>
-        </a>
-        <nav class="main-nav" id="mainNav">          <a href="index.html">Trang chủ</a>
-          <a href="index.html#about">Giới thiệu</a>
-          <a href="index.html#benefits">Lợi ích</a>
-          <a href="index.html#packages">Gói tập</a>
-          <a href="index.html#studios">Phòng tập</a>
-          <a href="tin-tuc.html" class="is-active">Tin tức</a>
-          <a href="index.html#contact">Liên hệ</a>        </nav>        <button class="mobile-menu" id="mobileMenuBtn" aria-label="Mở menu">
-          <span></span><span></span><span></span>
+  <nav id="mobileDrawer" class="drawer-closed fixed inset-0 z-[60] bg-surface flex flex-col h-full py-8 px-6 md:hidden" aria-hidden="true">
+    <div class="flex justify-between items-center mb-10">
+      <span class="font-serif text-xl font-semibold text-sage-deep">Jee Pilates</span>
+      <button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95" onclick="closeNav()" aria-label="Đóng menu">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="flex-grow overflow-y-auto space-y-6 py-2">
+      <a href="index.html" class="group flex items-center gap-4 text-on-surface-variant hover:text-sage-deep transition-all stagger-1 nav-item-transition">
+        <span class="material-symbols-outlined text-sage-deep">home</span>
+        <span class="font-serif text-3xl font-medium">Trang chủ</span>
+      </a>
+      <div class="stagger-2 nav-item-transition">
+        <button class="w-full flex justify-between items-center text-sage-deep bg-[#f0e0d3]/60 rounded-full px-6 py-4 transition-all" onclick="toggleSubmenu('goiTapMenu')">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined">fitness_center</span>
+            <span class="font-serif text-3xl font-medium">Gói tập</span>
+          </div>
+          <span class="material-symbols-outlined transition-transform duration-300" id="goiTapIcon">expand_more</span>
         </button>
-        <a class="btn btn-small" href="index.html#trial">Đăng ký tập thử</a>
+        <div class="submenu-enter flex flex-col ml-14 mt-4 space-y-4 border-l border-warm-sand" id="goiTapMenu">
+          <a href="index.html#packages" onclick="closeNav()" class="pl-6 py-1 text-base text-on-surface-variant hover:text-sage-deep transition-colors border-l-2 border-transparent hover:border-soft-clay">Group Class</a>
+          <a href="index.html#packages" onclick="closeNav()" class="pl-6 py-1 text-base text-on-surface-variant hover:text-sage-deep transition-colors border-l-2 border-transparent hover:border-soft-clay">Nhóm nhỏ</a>
+          <a href="index.html#packages" onclick="closeNav()" class="pl-6 py-1 text-base text-on-surface-variant hover:text-sage-deep transition-colors border-l-2 border-transparent hover:border-soft-clay">PT 1-1</a>
+        </div>
       </div>
-    </header>
+      <a href="index.html#studios" onclick="closeNav()" class="group flex items-center gap-4 text-on-surface-variant hover:text-sage-deep transition-all stagger-3 nav-item-transition">
+        <span class="material-symbols-outlined text-sage-deep">location_on</span>
+        <span class="font-serif text-3xl font-medium">Phòng tập</span>
+      </a>
+      <a href="news.html" class="group flex items-center gap-4 text-sage-deep transition-all stagger-4 nav-item-transition">
+        <span class="material-symbols-outlined text-sage-deep">article</span>
+        <span class="font-serif text-3xl font-medium">Tin tức</span>
+      </a>
+      <a href="index.html#trial" onclick="closeNav()" class="group flex items-center gap-4 text-on-surface-variant hover:text-sage-deep transition-all stagger-5 nav-item-transition">
+        <span class="material-symbols-outlined text-sage-deep">mail</span>
+        <span class="font-serif text-3xl font-medium">Liên hệ</span>
+      </a>
+    </div>
+    <div class="mt-auto pt-8 border-t border-warm-sand flex flex-col gap-5 items-center">
+      <a href="index.html#trial" onclick="closeNav()" class="w-full bg-sage-deep text-white py-5 rounded-full text-xs font-semibold tracking-[0.2em] uppercase shadow-lg hover:opacity-90 active:scale-[0.98] transition-all text-center">Đăng Ký Tập Thử</a>
+      <div class="flex gap-6">
+        <a href="https://instagram.com/jee.pilates" target="_blank" rel="noopener" class="text-sage-deep p-2 hover:bg-surface-container-high rounded-full transition-all" aria-label="Instagram">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg>
+        </a>
+        <a href="https://facebook.com/jeepilates" target="_blank" rel="noopener" class="text-sage-deep p-2 hover:bg-surface-container-high rounded-full transition-all" aria-label="Facebook">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+        </a>
+      </div>
+      <p class="text-[0.6rem] font-semibold tracking-widest text-soft-clay pb-2">© 2024 Jee Pilates Studio</p>
+    </div>
+    <div class="absolute inset-0 pointer-events-none opacity-10 -z-10">
+      <div class="absolute inset-0 bg-[radial-gradient(#EAE3DB_1px,transparent_1px)] [background-size:20px_20px]"></div>
+    </div>
+  </nav>
+  <div id="drawerBackdrop" class="hidden fixed inset-0 z-[55] bg-charcoal-silk/30 md:hidden" onclick="closeNav()"></div>
 
-    <section class="article-hero-section reveal">
-      <div class="container">
-        <nav id="articleBreadcrumb" class="crumbs">
-          <a href="index.html">Trang chủ</a>
-          <span>/</span>
-          <a href="tin-tuc.html">Tin tức</a>
-          <span>/</span>
-          <span id="articleBreadcrumbTitle"></span>
+  <main class="pt-16">
+    <section class="py-12 px-6 bg-surface-container-low border-b border-warm-sand">
+      <div class="max-w-screen-xl mx-auto">
+        <nav id="articleBreadcrumb" class="flex items-center gap-2 text-xs text-on-surface-variant mb-6">
+          <a href="index.html" class="hover:text-sage-deep transition-colors">Trang chủ</a>
+          <span class="material-symbols-outlined text-sm">chevron_right</span>
+          <a href="news.html" class="hover:text-sage-deep transition-colors">Tin tức</a>
+          <span class="material-symbols-outlined text-sm">chevron_right</span>
+          <span id="articleBreadcrumbTitle" class="text-sage-deep font-medium truncate max-w-[200px]"></span>
         </nav>
-        <div class="article-meta" id="articleMeta"></div>
-        <h1 id="articleTitle">Đang tải bài viết…</h1>
+        <div id="articleMeta" class="flex items-center gap-3 mb-4"></div>
+        <h1 id="articleTitle" class="font-serif text-3xl md:text-5xl font-semibold text-charcoal-silk leading-tight max-w-3xl">Đang tải bài viết…</h1>
       </div>
-      <div class="article-hero-img container" id="articleHeroImg"></div>
     </section>
 
-    <section class="article-content-section">
-      <div class="container article-layout">
-        <div class="article-body" id="articleBody"></div>
+    <div id="articleHeroImg" class="w-full max-h-[500px] overflow-hidden"></div>
 
-        <aside>
-          <div class="sidebar-card">
-            <p class="kicker">Hành động ngay</p>
-            <h3>Đăng ký tập thử miễn phí</h3>
-            <p>Trải nghiệm 1 buổi Pilates miễn phí, thiết kế riêng theo mục tiêu của bạn.</p>
-            <a href="index.html#trial" class="btn" style="margin-top:1rem;width:100%;justify-content:center;">
-              Đăng ký ngay
-            </a>
-            <p style="margin-top:0.85rem;font-size:0.9rem;">
-              Hoặc gọi: <a href="tel:02844556886"><strong>028 4455 6886</strong></a>
-            </p>
+    <section class="py-12 md:py-16 px-6 bg-surface">
+      <div class="max-w-screen-xl mx-auto grid md:grid-cols-[1fr_320px] gap-12 items-start">
+        <div id="articleBody" class="prose max-w-none text-on-surface-variant leading-relaxed space-y-5 text-base"></div>
+
+        <aside class="space-y-6">
+          <div class="bg-sage-deep p-8 rounded-2xl text-white">
+            <p class="text-xs font-semibold tracking-widest uppercase text-white/70 mb-2">Hành động ngay</p>
+            <h3 class="font-serif text-2xl font-semibold mb-3">Đăng ký tập thử miễn phí</h3>
+            <p class="text-sm text-white/80 mb-6 leading-relaxed">Trải nghiệm 1 buổi Pilates miễn phí, thiết kế riêng theo mục tiêu của bạn.</p>
+            <a href="index.html#trial" class="block w-full bg-white text-sage-deep py-3 rounded-full text-xs font-semibold tracking-widest uppercase text-center hover:opacity-90 transition-opacity">Đăng ký ngay</a>
+            <p class="text-center text-white/70 text-xs mt-4">Hoặc gọi: <a href="tel:02844556886" class="font-bold text-white hover:opacity-80">028 4455 6886</a></p>
           </div>
 
-          <div class="sidebar-card" style="margin-top:1rem;">
-            <p class="kicker">Chủ đề khác</p>
-            <ul class="sidebar-links" id="sidebarLinks"></ul>
+          <div class="bg-white border border-warm-sand p-6 rounded-2xl">
+            <p class="text-xs font-semibold tracking-widest uppercase text-secondary mb-4">Chủ đề khác</p>
+            <ul id="sidebarLinks" class="space-y-3"></ul>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="articles reveal">
-      <div class="container">
-        <div class="section-title split-title">
+    <section class="py-16 px-6 bg-surface-container-low">
+      <div class="max-w-screen-xl mx-auto">
+        <div class="flex items-end justify-between mb-10 gap-4">
           <div>
-            <p class="kicker">Đọc tiếp</p>
-            <h2>Bài viết liên quan</h2>
+            <p class="text-xs font-semibold tracking-[0.15em] uppercase text-secondary mb-3">Đọc tiếp</p>
+            <h2 class="font-serif text-3xl font-semibold text-sage-deep">Bài viết liên quan</h2>
           </div>
-          <a class="read-all" href="tin-tuc.html">Xem tất cả</a>
+          <a href="news.html" class="text-sm text-sage-deep font-semibold hover:opacity-70 transition-opacity whitespace-nowrap">Xem tất cả →</a>
         </div>
-        <div class="article-grid" id="relatedArticles"></div>
+        <div id="relatedArticles" class="grid md:grid-cols-3 gap-6"></div>
       </div>
     </section>
+  </main>
 
-    <footer class="site-footer" id="contact">
-      <div class="container footer-grid">
-        <div>
-          <a href="index.html" class="brand brand-footer">
-            <span class="brand-mark">JEE</span>
-            <span class="brand-text">Jee Pilates</span>
+  <footer class="bg-surface-container border-t border-warm-sand">
+    <div class="max-w-screen-xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-10">
+      <div class="space-y-4">
+        <h2 class="font-serif text-2xl font-semibold text-sage-deep">Jee Pilates</h2>
+        <p class="text-sm text-on-surface-variant leading-relaxed">
+          Hệ thống Pilates cá nhân hóa hàng đầu TP.HCM.<br>
+          © 2024 Jee Pilates Studio.
+        </p>
+        <div class="flex gap-4">
+          <a href="https://facebook.com/jeepilates" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-warm-sand flex items-center justify-center hover:bg-sage-deep hover:text-white transition-colors text-on-surface-variant" aria-label="Facebook">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
-          <p>
-            Chi nhánh Phú Nhuận: 159/4 Hoàng Văn Thụ, TP.HCM<br />
-            Chi nhánh Quận 1: 40E Ngô Đức Kế, TP.HCM<br />
-            Chi nhánh Quận 3: 149A Nguyễn Phúc Nguyên, TP.HCM<br />
-            Chi nhánh Bình Thạnh: 488A Lê Quang Định, TP.HCM
-          </p>
-          <div class="social-links">
-            <a href="https://facebook.com/jeepilates" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            <a href="https://instagram.com/jee.pilates" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a href="https://tiktok.com/@jeepilates" class="social-link" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <h4>Liên hệ</h4>
-          <p>Hotline: 028 4455 6886</p>
-          <p>Email: cskh@jeepilates.vn</p>
-          <p>Zalo: Jee Pilates</p>
-        </div>
-        <div>
-          <h4>Liên kết nhanh</h4>
-          <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="index.html#about">Giới thiệu</a></li>
-            <li><a href="index.html#packages">Gói tập</a></li>
-            <li><a href="index.html#studios">Phòng tập</a></li>
-            <li><a href="tin-tuc.html">Tin tức</a></li>
-          </ul>
+          <a href="https://instagram.com/jee.pilates" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-warm-sand flex items-center justify-center hover:bg-sage-deep hover:text-white transition-colors text-on-surface-variant" aria-label="Instagram">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://tiktok.com/@jeepilates" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-warm-sand flex items-center justify-center hover:bg-sage-deep hover:text-white transition-colors text-on-surface-variant" aria-label="TikTok">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
         </div>
       </div>
-      <p class="copyright">Copyright 2026 © jeepilates.vn (demo layout)</p>
-    </footer>
-
-    <div class="float-contact" id="floatContact">
-      <div class="float-menu" id="floatMenu">
-        <a class="float-item" href="tel:02844556886">
-          <i class="float-item-icon phone">☎</i>
-          028 4455 6886
-        </a>
-        <a class="float-item" href="https://zalo.me/0909368770" target="_blank" rel="noopener">
-          <i class="float-item-icon zalo">Z</i>
-          Chat Zalo
-        </a>
-        <a class="float-item" href="mailto:cskh@jeepilates.vn">
-          <i class="float-item-icon email">@</i>
-          cskh@jeepilates.vn
-        </a>
+      <div class="space-y-3">
+        <h4 class="text-xs font-semibold tracking-widest uppercase text-sage-deep mb-4">Liên hệ</h4>
+        <p class="text-sm text-on-surface-variant">Hotline: <a href="tel:02844556886" class="hover:text-sage-deep">028 4455 6886</a></p>
+        <p class="text-sm text-on-surface-variant">Email: <a href="mailto:cskh@jeepilates.vn" class="hover:text-sage-deep">cskh@jeepilates.vn</a></p>
+        <p class="text-sm text-on-surface-variant">Zalo: Jee Pilates</p>
       </div>
-      <button class="float-toggle" id="floatToggle" aria-label="Liên hệ chúng tôi">+</button>
+      <div class="space-y-3">
+        <h4 class="text-xs font-semibold tracking-widest uppercase text-sage-deep mb-4">Liên kết nhanh</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html#about" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Giới thiệu</a></li>
+          <li><a href="index.html#packages" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Gói tập</a></li>
+          <li><a href="index.html#studios" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Phòng tập</a></li>
+          <li><a href="news.html" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Tin tức</a></li>
+          <li><a href="index.html#trial" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Đăng ký tập thử</a></li>
+        </ul>
+      </div>
     </div>
+  </footer>
 
-    <script src="articles-data.js"></script>
-    <script src="article.js"></script>
-    <script src="script.js"></script>
-  </body>
+  <a href="tel:02844556886" class="fixed bottom-6 right-6 w-14 h-14 bg-sage-deep text-white rounded-full flex items-center justify-center shadow-2xl z-40 active:scale-90 hover:opacity-90 transition-all" aria-label="Gọi ngay">
+    <span class="material-symbols-outlined">call</span>
+  </a>
+  <script>
+    const drawer   = document.getElementById('mobileDrawer');
+    const backdrop = document.getElementById('drawerBackdrop');
+    function openNav() {
+      drawer.classList.remove('drawer-closed');
+      drawer.removeAttribute('aria-hidden');
+      backdrop.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      drawer.querySelectorAll('.nav-item-transition').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(-20px)';
+        setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateX(0)'; }, 80 + i * 55);
+      });
+    }
+    function closeNav() {
+      drawer.classList.add('drawer-closed');
+      drawer.setAttribute('aria-hidden', 'true');
+      backdrop.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById(id);
+      const iconMap = { 'goiTapMenu': 'goiTapIcon' };
+      const icon = document.getElementById(iconMap[id]);
+      const isOpen = submenu.classList.contains('submenu-open');
+      submenu.classList.toggle('submenu-open', !isOpen);
+      if (icon) icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="articles-data.js"></script>
+  <script src="article.js"></script>
+</body>
 </html>

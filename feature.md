@@ -1,0 +1,2 @@
+as a admin user, I want to have an ability to control the content of the web, can posta news to the web as well. On ly admin user can do that. 
+We do not have other account, only admin user is valid. Other can only visit the website.

@@ -1,446 +1,656 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jee Pilates - Landing Page</title>
-    <meta
-      name="description"
-      content="Trang giới thiệu hệ thống Pilates với không gian tập hiện đại, huấn luyện viên chuyên nghiệp và lớp học đa dạng."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="bg-glow bg-glow--top"></div>
-    <div class="bg-glow bg-glow--bottom"></div>
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Jee Pilates | Pilates: Đẹp hơn, Khỏe hơn</title>
+  <meta name="description" content="Hệ thống Pilates cá nhân hóa hàng đầu TP.HCM — 4 cơ sở, 40 huấn luyện viên chuyên nghiệp, hơn 1,000 lớp học mỗi tuần."/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "surface":              "#fbf9f7",
+            "surface-dim":          "#dbdad8",
+            "surface-container-low":"#f5f3f1",
+            "surface-container":    "#efedec",
+            "surface-container-high":"#eae8e6",
+            "on-surface":           "#1b1c1b",
+            "on-surface-variant":   "#434843",
+            "outline-variant":      "#c3c8c0",
+            "on-primary-container": "#f6fff4",
+            "sage-deep":            "#4A5D4C",
+            "sage-mid":             "#4d6150",
+            "warm-sand":            "#EAE3DB",
+            "charcoal-silk":        "#2D2D2D",
+            "soft-clay":            "#B5A496",
+            "secondary":            "#685c53",
+            "on-secondary-container":"#6e6258",
+          },
+          fontFamily: {
+            serif:   ["Playfair Display", "Georgia", "serif"],
+            sans:    ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glass-nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .hero-gradient {
+      background: linear-gradient(
+        to bottom,
+        rgba(74, 93, 76, 0.15) 0%,
+        rgba(74, 93, 76, 0.50) 60%,
+        rgba(251, 249, 247, 1) 100%
+      );
+    }
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
 
-    <header class="site-header" id="top">
-      <div class="container nav-wrap">
-        <a href="#top" class="brand">
-          <span class="brand-mark">JEE</span>
-          <span class="brand-text">Jee Pilates</span>
-        </a>
-        <nav class="main-nav" id="mainNav">          <a href="#about">Giới thiệu</a>
-          <a href="#benefits">Lợi ích</a>
-          <a href="#packages">Gói tập</a>
-          <a href="#studios">Phòng tập</a>
-          <a href="#gallery">Không gian</a>
-          <a href="tin-tuc.html">Tin tức</a>
-          <a href="#contact">Liên hệ</a>        </nav>        <button class="mobile-menu" id="mobileMenuBtn" aria-label="Mở menu">
-          <span></span><span></span><span></span>
-        </button>
-        <a class="btn btn-small" href="#trial">Đăng ký tập thử</a>
+    /* ── Mobile nav drawer ── */
+    .nav-item-transition {
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.3s ease;
+    }
+    .stagger-1 { transition-delay: 50ms; }
+    .stagger-2 { transition-delay: 100ms; }
+    .stagger-3 { transition-delay: 150ms; }
+    .stagger-4 { transition-delay: 200ms; }
+    .stagger-5 { transition-delay: 250ms; }
+
+    .submenu-enter {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+    .submenu-open { max-height: 500px; }
+
+    #mobileDrawer { transition: transform 0.5s cubic-bezier(0.2, 0, 0, 1); }
+    #mobileDrawer.drawer-closed { transform: translateX(-100%); }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-sans antialiased overflow-x-hidden">
+
+<!-- ── Navigation ──────────────────────────────────────────── -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 glass-nav shadow-sm">
+  <div class="flex justify-between items-center px-6 py-4 max-w-screen-xl mx-auto">
+    <!-- Logo -->
+    <a href="#top" class="flex items-center gap-2 no-underline">
+      <span class="font-serif text-xl font-semibold text-sage-deep leading-none">Jee Pilates</span>
+    </a>
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#about"    class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Giới thiệu</a>
+      <a href="#packages" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Gói tập</a>
+      <a href="#studios"  class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Phòng tập</a>
+      <a href="#gallery"  class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Không gian</a>
+      <a href="news.html" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Tin tức</a>
+    </nav>
+    <!-- Desktop CTA -->
+    <a href="#trial" class="hidden md:inline-flex bg-sage-deep text-white px-6 py-2 rounded-full text-xs font-semibold tracking-widest uppercase hover:opacity-80 transition-opacity active:scale-95">
+      Đăng ký tập thử
+    </a>
+    <!-- Mobile hamburger -->
+    <button class="md:hidden p-2 text-sage-deep hover:opacity-70 transition-opacity active:scale-95" onclick="openNav()" aria-label="Mở menu">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+</header>
+
+<!-- ── Mobile Navigation Drawer ────────────────────────────── -->
+<nav id="mobileDrawer" class="drawer-closed fixed inset-0 z-[60] bg-surface flex flex-col h-full py-8 px-6 md:hidden" aria-hidden="true">
+  <!-- Drawer header -->
+  <div class="flex justify-between items-center mb-10">
+    <span class="font-serif text-xl font-semibold text-sage-deep">Jee Pilates</span>
+    <button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95" onclick="closeNav()" aria-label="Đóng menu">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+
+  <!-- Nav links -->
+  <div class="flex-grow overflow-y-auto space-y-6 py-2">
+    <!-- Trang chủ -->
+    <a href="#top" onclick="closeNav()" class="group flex items-center gap-4 text-on-surface-variant hover:text-sage-deep transition-all stagger-1 nav-item-transition">
+      <span class="material-symbols-outlined text-sage-deep">home</span>
+      <span class="font-serif text-3xl font-medium">Trang chủ</span>
+    </a>
+
+    <!-- Gói tập (accordion) -->
+    <div class="stagger-2 nav-item-transition">
+      <button class="w-full flex justify-between items-center text-sage-deep bg-[#f0e0d3]/60 rounded-full px-6 py-4 transition-all" onclick="toggleSubmenu('goiTapMenu')">
+        <div class="flex items-center gap-4">
+          <span class="material-symbols-outlined">fitness_center</span>
+          <span class="font-serif text-3xl font-medium">Gói tập</span>
+        </div>
+        <span class="material-symbols-outlined transition-transform duration-300" id="goiTapIcon">expand_more</span>
+      </button>
+      <div class="submenu-enter flex flex-col ml-14 mt-4 space-y-4 border-l border-warm-sand" id="goiTapMenu">
+        <a href="#packages" onclick="closeNav()" class="pl-6 py-1 text-base text-on-surface-variant hover:text-sage-deep transition-colors border-l-2 border-transparent hover:border-soft-clay">Group Class</a>
+        <a href="#packages" onclick="closeNav()" class="pl-6 py-1 text-base text-on-surface-variant hover:text-sage-deep transition-colors border-l-2 border-transparent hover:border-soft-clay">Nhóm nhỏ</a>
+        <a href="#packages" onclick="closeNav()" class="pl-6 py-1 text-base text-on-surface-variant hover:text-sage-deep transition-colors border-l-2 border-transparent hover:border-soft-clay">PT 1-1</a>
       </div>
-    </header>
-
-    <main>
-      <!-- ── Hero ────────────────────────────────────────────── -->
-      <section class="hero">
-        <div class="hero-bg">
-          <img src="images/800x1000-31.jpg" alt="Jee Pilates Studio" />
-        </div>
-        <div class="container hero-inner">
-          <p class="hero-eyebrow">Jee Pilates · TP.HCM</p>
-          <h1 class="hero-display">
-            Pilates<br>
-            <em>đẹp hơn,</em><br>
-            khỏe hơn.
-          </h1>
-          <p class="hero-sub">
-            Hệ thống Pilates cá nhân hóa hàng đầu TP.HCM — 4 cơ sở,
-            40 huấn luyện viên chuyên nghiệp, hơn 1,000 lớp học mỗi tuần.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-light" href="#trial">Đăng ký tập thử miễn phí</a>
-            <a class="btn btn-outline-light" href="#about">Khám phá thêm</a>
-          </div>
-        </div>
-        <a class="hero-scroll" href="#about" aria-label="Cuộn xuống">↓</a>
-      </section>
-
-      <!-- ── About / Stats ──────────────────────────────── -->
-      <section class="about reveal" id="about">
-        <div class="container about-grid">
-          <div class="section-title">
-            <p class="kicker">Giới thiệu Jee Pilates</p>
-            <h2>Không chỉ là tập luyện — đó là hành trình chăm sóc bản thân toàn diện</h2>
-          </div>
-          <p class="about-text">
-            Thành lập từ 2022, Jee Pilates đã đồng hành cùng gần 2,000 hội viên với hơn
-            1,000 lớp mỗi tuần. Mỗi lộ trình được thiết kế theo thể trạng và mục tiêu riêng,
-            giúp học viên cải thiện linh hoạt cơ thể, tăng cường sức mạnh lõi và giữ dáng bền vững.
-          </p>
-        </div>
-
-        <div class="container stats-grid">
-          <article class="stat-card reveal-item">
-            <h3>4</h3>
-            <p>Trung tâm tại TP.HCM</p>
-          </article>
-          <article class="stat-card reveal-item">
-            <h3>40</h3>
-            <p>Huấn luyện viên chuyên nghiệp</p>
-          </article>
-          <article class="stat-card reveal-item">
-            <h3>1,000+</h3>
-            <p>Lớp học mỗi tuần</p>
-          </article>
-          <article class="stat-card reveal-item">
-            <h3>2,000+</h3>
-            <p>Hội viên đang luyện tập</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="benefits reveal" id="benefits">
-        <div class="container">
-          <div class="section-title centered">
-            <p class="kicker">Nâng cao sức khỏe và tinh thần</p>
-            <h2>Vì sao học viên chọn Jee Pilates?</h2>
-          </div>
-          <div class="benefit-grid">
-            <article class="benefit-card reveal-item">
-              <img src="images/420x300-1.jpg" alt="Thuận tiện di chuyển" />
-              <h3>Thuận tiện di chuyển</h3>
-              <p>Studio nằm tại các quận trung tâm, trang thiết bị hiện đại và dễ tiếp cận.</p>
-            </article>
-            <article class="benefit-card reveal-item">
-              <img src="images/420x300-2.jpg" alt="Huấn luyện viên cao cấp" />
-              <h3>Huấn luyện viên cao cấp</h3>
-              <p>Đội ngũ giàu kinh nghiệm theo sát lộ trình tập luyện của từng hội viên.</p>
-            </article>
-            <article class="benefit-card reveal-item">
-              <img src="images/420x300-3.jpg" alt="Chi phí tối ưu" />
-              <h3>Chi phí tối ưu</h3>
-              <p>Gói tập linh hoạt theo ngân sách và mục tiêu thể chất khác nhau.</p>
-            </article>
-            <article class="benefit-card reveal-item">
-              <img src="images/420x300-4.jpg" alt="Lịch tập đa dạng" />
-              <h3>Lịch tập đa dạng</h3>
-              <p>Lịch học từ cơ bản đến nâng cao, dễ dàng sắp xếp theo thời gian cá nhân.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="packages reveal" id="packages">
-        <div class="container">
-          <div class="section-title centered">
-            <p class="kicker">Gói tập luyện</p>
-            <h2>Chọn gói phù hợp với mục tiêu của bạn</h2>
-          </div>
-          <div class="package-grid">
-            <article class="package-card reveal-item">
-              <p class="package-name">Gói Nhóm</p>
-              <p class="package-price">186K <span>/ buổi</span></p>
-              <p class="package-desc">Lớp nhóm năng động, phù hợp người mới và hội viên thích tập cùng bạn bè.</p>
-              <ul class="package-features">
-                <li>Lớp nhóm tối đa 8 người</li>
-                <li>Lịch học linh hoạt 7/7</li>
-                <li>Phòng tập đầy đủ thiết bị</li>
-                <li>Theo dõi tiến trình cơ bản</li>
-              </ul>
-              <a href="#trial" class="btn btn-ghost" style="width:100%;justify-content:center;">Đăng ký thử</a>
-            </article>
-            <article class="package-card featured reveal-item">
-              <span class="package-badge">Phổ biến nhất</span>
-              <p class="package-name">Gói Nhóm Nhỏ</p>
-              <p class="package-price">320K <span>/ buổi</span></p>
-              <p class="package-desc">Lớp 2–4 người, được huấn luyện viên chú ý sát sao và điều chỉnh kỹ thuật riêng.</p>
-              <ul class="package-features">
-                <li>Nhóm nhỏ 2–4 học viên</li>
-                <li>Lộ trình bán cá nhân hóa</li>
-                <li>Điều chỉnh bài tập theo thể trạng</li>
-                <li>Báo cáo tiến trình định kỳ</li>
-                <li>Ưu tiên đặt lịch giờ cao điểm</li>
-              </ul>
-              <a href="#trial" class="btn" style="width:100%;justify-content:center;">Đăng ký thử</a>
-            </article>
-            <article class="package-card reveal-item">
-              <p class="package-name">Gói PT 1-1</p>
-              <p class="package-price">650K <span>/ buổi</span></p>
-              <p class="package-desc">Huấn luyện cá nhân hoàn toàn, thiết kế riêng theo mục tiêu và thể trạng của bạn.</p>
-              <ul class="package-features">
-                <li>1 học viên – 1 huấn luyện viên</li>
-                <li>Lộ trình hoàn toàn cá nhân hóa</li>
-                <li>Đánh giá thể trạng chuyên sâu</li>
-                <li>Hỗ trợ dinh dưỡng cơ bản</li>
-                <li>Linh hoạt giờ học theo lịch riêng</li>
-              </ul>
-              <a href="#trial" class="btn btn-ghost" style="width:100%;justify-content:center;">Đăng ký thử</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── Mission (dark) ─────────────────────────────── -->
-      <section class="section-dark mission reveal" id="mission">
-        <div class="container mission-grid">
-          <div class="mission-text">
-            <p class="kicker">Sứ mệnh của chúng tôi</p>
-            <h2>Pilates không chỉ là mốt — đó là phương pháp chăm sóc cơ thể vĩnh viễn</h2>
-            <p>
-              Chúng tôi tin rằng mỗi người đều xứng đáng được sống trong cơ thể khọe mạnh và tự tin.
-              Pilates điều chỉnh từ bên trong — cải thiện tư thế, tăng linh hoạt, giảm đau mãn tính và
-              xây dựng nền tảng thể chất bền vững cho mọi lứa tuổi.
-            </p>
-            <a class="btn btn-light" href="#trial">Bắt đầu hành trình của bạn</a>
-          </div>
-          <div class="mission-img">
-            <img src="images/420x300-2.jpg" alt="Huấn luyện viên Jee Pilates" />
-          </div>
-        </div>
-      </section>
-
-      <section class="studios reveal" id="studios">
-        <div class="container">
-          <div class="section-title centered">
-            <p class="kicker">Hệ thống phòng tập</p>
-            <h2>4 cơ sở tại TP.HCM</h2>
-          </div>
-          <div class="studio-grid">
-            <article class="studio-card reveal-item">
-              <div class="studio-map">
-                <iframe
-                  src="https://maps.google.com/maps?q=159+Hoang+Van+Thu,+Phu+Nhuan,+Ho+Chi+Minh+City,+Vietnam&output=embed&z=16"
-                  title="Jee Hoàng Văn Thụ" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                  allowfullscreen></iframe>
-              </div>
-              <h3>Jee Hoàng Văn Thụ</h3>
-              <p>159/4 Hoàng Văn Thụ, Phú Nhuận, TP.HCM</p>
-              <a href="https://maps.app.goo.gl/YYiep1HcV16jFx1s9" target="_blank" rel="noopener">Đi đến cửa hàng</a>
-            </article>
-            <article class="studio-card reveal-item">
-              <div class="studio-map">
-                <iframe
-                  src="https://maps.google.com/maps?q=40+Ngo+Duc+Ke,+District+1,+Ho+Chi+Minh+City,+Vietnam&output=embed&z=16"
-                  title="Jee Ngô Đức Kế" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                  allowfullscreen></iframe>
-              </div>
-              <h3>Jee Ngô Đức Kế</h3>
-              <p>40E Ngô Đức Kế, Quận 1, TP.HCM</p>
-              <a href="https://maps.app.goo.gl/ro2mGaniPz5YNwwz7" target="_blank" rel="noopener">Đi đến cửa hàng</a>
-            </article>
-            <article class="studio-card reveal-item">
-              <div class="studio-map">
-                <iframe
-                  src="https://maps.google.com/maps?q=488+Le+Quang+Dinh,+Binh+Thanh,+Ho+Chi+Minh+City,+Vietnam&output=embed&z=16"
-                  title="Jee Lê Quang Định" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                  allowfullscreen></iframe>
-              </div>
-              <h3>Jee Lê Quang Định</h3>
-              <p>488A Lê Quang Định, Bình Thạnh, TP.HCM</p>
-              <a href="https://maps.app.goo.gl/mH8aoU75zHq7tjEbA" target="_blank" rel="noopener">Đi đến cửa hàng</a>
-            </article>
-            <article class="studio-card reveal-item">
-              <div class="studio-map">
-                <iframe
-                  src="https://maps.google.com/maps?q=149+Nguyen+Phuc+Nguyen,+District+3,+Ho+Chi+Minh+City,+Vietnam&output=embed&z=16"
-                  title="Jee Nguyễn Phúc Nguyên" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                  allowfullscreen></iframe>
-              </div>
-              <h3>Jee Nguyễn Phúc Nguyên</h3>
-              <p>149A Nguyễn Phúc Nguyên, Quận 3, TP.HCM</p>
-              <a href="https://maps.app.goo.gl/WTxYQ3hkwhpvVUpL9" target="_blank" rel="noopener">Đi đến cửa hàng</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="gallery reveal" id="gallery">
-        <div class="container">
-          <div class="section-title">
-            <p class="kicker">Không gian tập luyện</p>
-            <h2>Rộng rãi, tinh tế, tiêu chuẩn Pilates quốc tế</h2>
-          </div>
-          <div class="gallery-grid">
-            <img class="reveal-item" src="images/650x650-21.jpg" alt="Không gian phòng tập 1" />
-            <img class="reveal-item" src="images/650x650-22.jpg" alt="Không gian phòng tập 2" />
-            <img class="reveal-item" src="images/650x650-23.jpg" alt="Không gian phòng tập 3" />
-            <img class="reveal-item" src="images/650x650-24.jpg" alt="Không gian phòng tập 4" />
-            <img class="reveal-item" src="images/650x650-25.jpg" alt="Không gian phòng tập 5" />
-            <img class="reveal-item" src="images/650x650-26.jpg" alt="Không gian phòng tập 6" />
-          </div>
-        </div>
-      </section>
-
-      <!-- ── Testimonials (dark) ───────────────────────── -->
-      <section class="section-dark testimonials reveal" id="testimonials">
-        <div class="container">
-          <div class="section-title centered">
-            <p class="kicker">Học viên nói gì</p>
-            <h2>Hơn 2,000 người đã thay đổi</h2>
-          </div>
-          <div class="testimonial-grid">
-            <article class="testimonial-card reveal-item">
-              <p class="testimonial-quote">“Sau 3 tháng tập Pilates tại Jee Pilates, đau lưng mãn tính của tôi giảm rõ rệt. Tôi được dạy rất kỹ về tư thế và cách thở đúng.”</p>
-              <div class="testimonial-author">
-                <strong>Nguyễn Thị Lan Anh</strong>
-                <span>Kế toán, 34 tuổi</span>
-              </div>
-            </article>
-            <article class="testimonial-card reveal-item">
-              <p class="testimonial-quote">“Mình đã thử nhiều phương pháp khác nhau nhưng Pilates là môn duy nhất giúp mình vừa giảm cân vừa cảm thấy khọe thực sự.”</p>
-              <div class="testimonial-author">
-                <strong>Trần Phương Thảo</strong>
-                <span>Marketing Manager, 29 tuổi</span>
-              </div>
-            </article>
-            <article class="testimonial-card reveal-item">
-              <p class="testimonial-quote">“Huấn luyện viên tận tâm, cơ sở sạch sẽ và sang trọng. Không gian tập hầu như giúp mình quên hết stress sau một ngày dài.”</p>
-              <div class="testimonial-author">
-                <strong>Lê Hoàng Mai</strong>
-                <span>Bác sĩ, 41 tuổi</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="trial reveal" id="trial">
-        <div class="container trial-grid">
-          <div>
-            <p class="kicker">Đăng ký tập trải nghiệm</p>
-            <h2>Nhận ngay 1 buổi tập thử miễn phí</h2>
-            <p>
-              Điền thông tin để đội ngũ tư vấn liên hệ và thiết kế lộ trình phù hợp với thể
-              trạng, mục tiêu và lịch sinh hoạt của bạn.
-            </p>
-            <div class="trial-contact">
-              <p><strong>Hotline:</strong> 028 4455 6886</p>
-              <p><strong>Email:</strong> cskh@jeepilates.vn</p>
-            </div>
-          </div>
-          <form class="trial-form" action="#" method="post">
-            <label>
-              Họ và tên
-              <input type="text" name="name" placeholder="Nhập họ và tên" required />
-            </label>
-            <label>
-              Số điện thoại
-              <input type="tel" name="phone" placeholder="Nhập số điện thoại" required />
-            </label>
-            <label>
-              Cơ sở mong muốn
-              <select name="studio" required>
-                <option value="">Chọn cơ sở</option>
-                <option>Hoàng Văn Thụ</option>
-                <option>Ngô Đức Kế</option>
-                <option>Lê Quang Định</option>
-                <option>Nguyễn Phúc Nguyên</option>
-              </select>
-            </label>
-            <label>
-              Ghi chú
-              <textarea name="note" rows="3" placeholder="Mục tiêu tập luyện của bạn"></textarea>
-            </label>
-            <button class="btn" type="submit">Đăng ký ngay</button>
-          </form>
-        </div>
-      </section>
-
-      <section class="articles reveal" id="articles">
-        <div class="container">
-          <div class="section-title split-title">
-            <div>
-              <p class="kicker">Kiến thức tập luyện</p>
-              <h2>Bài viết nổi bật</h2>
-            </div>
-            <a class="read-all" href="tin-tuc.html">Xem tất cả</a>
-          </div>
-          <div class="article-grid">
-            <article class="article-card reveal-item">
-              <img src="images/560x360-41.jpg" alt="Pilates cho người mới" />
-              <h3><a href="article.html?slug=pilates-nguoi-moi">Pilates cho người mới bắt đầu - Bí quyết sống khỏe mỗi ngày</a></h3>
-              <p>Gợi ý lộ trình nhập môn giúp cải thiện tư thế và sức bền an toàn.</p>
-              <a href="article.html?slug=pilates-nguoi-moi">Đọc tiếp</a>
-            </article>
-            <article class="article-card reveal-item">
-              <img src="images/560x360-42.jpg" alt="Sức khỏe gen z" />
-              <h3><a href="article.html?slug=suc-khoe-gen-z">Sức khỏe Gen Z - Giải pháp đến từ Pilates</a></h3>
-              <p>Một phương pháp tập luyện thông minh cho nhịp sống hiện đại.</p>
-              <a href="article.html?slug=suc-khoe-gen-z">Đọc tiếp</a>
-            </article>
-            <article class="article-card reveal-item">
-              <img src="images/560x360-43.jpg" alt="Giảm stress với pilates" />
-              <h3><a href="article.html?slug=pilates-stress">Pilates giúp giảm stress và phục hồi năng lượng như thế nào?</a></h3>
-              <p>Kết hợp nhịp thở và chuyển động để cải thiện sức khỏe tinh thần.</p>
-              <a href="article.html?slug=pilates-stress">Đọc tiếp</a>
-            </article>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer" id="contact">
-      <div class="container footer-grid">
-        <div>
-          <a href="#top" class="brand brand-footer">
-            <span class="brand-mark">JEE</span>
-            <span class="brand-text">Jee Pilates</span>
-          </a>
-          <p>
-            Chi nhánh Phú Nhuận: 159/4 Hoàng Văn Thụ, TP.HCM<br />
-            Chi nhánh Quận 1: 40E Ngô Đức Kế, TP.HCM<br />
-            Chi nhánh Quận 3: 149A Nguyễn Phúc Nguyên, TP.HCM<br />
-            Chi nhánh Bình Thạnh: 488A Lê Quang Định, TP.HCM
-          </p>
-          <div class="social-links">
-            <a href="https://facebook.com/jeepilates" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            <a href="https://instagram.com/jee.pilates" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a href="https://tiktok.com/@jeepilates" class="social-link" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <h4>Liên hệ</h4>
-          <p>Hotline: 028 4455 6886</p>
-          <p>Email: cskh@jeepilates.vn</p>
-          <p>Zalo: Jee Pilates</p>
-        </div>
-        <div>
-          <h4>Liên kết nhanh</h4>
-          <ul>
-            <li><a href="#about">Giới thiệu</a></li>
-            <li><a href="#packages">Gói tập</a></li>
-            <li><a href="#studios">Phòng tập</a></li>
-            <li><a href="tin-tuc.html">Tin tức</a></li>
-            <li><a href="#trial">Đăng ký tập thử</a></li>
-          </ul>
-        </div>
-      </div>
-      <p class="copyright">Copyright 2026 © jeepilates.vn (demo layout)</p>
-    </footer>
-
-    <div class="float-contact" id="floatContact">
-      <div class="float-menu" id="floatMenu">
-        <a class="float-item" href="tel:02844556886">
-          <i class="float-item-icon phone">☎</i>
-          028 4455 6886
-        </a>
-        <a class="float-item" href="https://zalo.me/0909368770" target="_blank" rel="noopener">
-          <i class="float-item-icon zalo">Z</i>
-          Chat Zalo
-        </a>
-        <a class="float-item" href="mailto:cskh@jeepilates.vn">
-          <i class="float-item-icon email">@</i>
-          cskh@jeepilates.vn
-        </a>
-      </div>
-      <button class="float-toggle" id="floatToggle" aria-label="Liên hệ chúng tôi">+</button>
     </div>
 
-    <script src="script.js"></script>
-  </body>
+    <!-- Phòng tập -->
+    <a href="#studios" onclick="closeNav()" class="group flex items-center gap-4 text-on-surface-variant hover:text-sage-deep transition-all stagger-3 nav-item-transition">
+      <span class="material-symbols-outlined text-sage-deep">location_on</span>
+      <span class="font-serif text-3xl font-medium">Phòng tập</span>
+    </a>
+
+    <!-- Tin tức -->
+    <a href="news.html" class="group flex items-center gap-4 text-on-surface-variant hover:text-sage-deep transition-all stagger-4 nav-item-transition">
+      <span class="material-symbols-outlined text-sage-deep">article</span>
+      <span class="font-serif text-3xl font-medium">Tin tức</span>
+    </a>
+
+    <!-- Liên hệ -->
+    <a href="#trial" onclick="closeNav()" class="group flex items-center gap-4 text-on-surface-variant hover:text-sage-deep transition-all stagger-5 nav-item-transition">
+      <span class="material-symbols-outlined text-sage-deep">mail</span>
+      <span class="font-serif text-3xl font-medium">Liên hệ</span>
+    </a>
+  </div>
+
+  <!-- Drawer footer -->
+  <div class="mt-auto pt-8 border-t border-warm-sand flex flex-col gap-5 items-center">
+    <a href="#trial" onclick="closeNav()" class="w-full bg-sage-deep text-white py-5 rounded-full text-xs font-semibold tracking-[0.2em] uppercase shadow-lg hover:opacity-90 active:scale-[0.98] transition-all text-center">
+      Đăng Ký Tập Thử
+    </a>
+    <div class="flex gap-6">
+      <a href="https://instagram.com/jee.pilates" target="_blank" rel="noopener" class="text-sage-deep p-2 hover:bg-surface-container-high rounded-full transition-all" aria-label="Instagram">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg>
+      </a>
+      <a href="https://facebook.com/jeepilates" target="_blank" rel="noopener" class="text-sage-deep p-2 hover:bg-surface-container-high rounded-full transition-all" aria-label="Facebook">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+      </a>
+    </div>
+    <p class="text-[0.6rem] font-semibold tracking-widest text-soft-clay pb-2">© 2024 Jee Pilates Studio</p>
+  </div>
+
+  <!-- Dot texture overlay -->
+  <div class="absolute inset-0 pointer-events-none opacity-10 -z-10">
+    <div class="absolute inset-0 bg-[radial-gradient(#EAE3DB_1px,transparent_1px)] [background-size:20px_20px]"></div>
+  </div>
+</nav>
+<!-- Drawer backdrop -->
+<div id="drawerBackdrop" class="hidden fixed inset-0 z-[55] bg-charcoal-silk/30 md:hidden" onclick="closeNav()"></div>
+
+<main class="pt-16">
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="relative min-h-[92vh] flex flex-col justify-end pb-16 md:pb-24 overflow-hidden" id="top">
+    <div class="absolute inset-0 z-0">
+      <img src="images/800x1000-31.jpg" alt="Jee Pilates Studio" class="w-full h-full object-cover object-top"/>
+      <div class="absolute inset-0 hero-gradient"></div>
+    </div>
+    <div class="relative z-10 px-6 max-w-screen-xl mx-auto w-full space-y-4">
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-sage-deep">Jee Pilates · TP.HCM</p>
+      <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-semibold text-charcoal-silk leading-tight max-w-2xl">
+        Pilates: <em class="not-italic text-sage-deep">Đẹp hơn,</em><br>Khỏe hơn.
+      </h1>
+      <p class="text-on-surface-variant text-base md:text-lg max-w-md leading-relaxed">
+        Hệ thống Pilates cá nhân hóa hàng đầu TP.HCM — 4 cơ sở, 40 huấn luyện viên chuyên nghiệp, hơn 1,000 lớp học mỗi tuần.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 pt-2">
+        <a href="#trial" class="inline-flex items-center justify-center bg-sage-deep text-white px-8 py-4 rounded-full text-xs font-semibold tracking-widest uppercase shadow-lg hover:opacity-90 active:scale-95 transition-all">
+          Đăng ký tập thử miễn phí
+        </a>
+        <a href="#about" class="inline-flex items-center justify-center border border-sage-deep text-sage-deep px-8 py-4 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-sage-deep hover:text-white transition-all">
+          Khám phá thêm
+        </a>
+      </div>
+    </div>
+    <a href="#about" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center text-sage-deep animate-bounce shadow" aria-label="Cuộn xuống">
+      <span class="material-symbols-outlined text-xl">expand_more</span>
+    </a>
+  </section>
+
+  <!-- ── Key Stats ────────────────────────────────────────────── -->
+  <section class="py-10 bg-surface-container-low border-y border-warm-sand" id="about">
+    <div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory px-6 gap-8 md:gap-0 items-center max-w-screen-xl mx-auto md:justify-around">
+      <div class="snap-center shrink-0 text-center min-w-[120px]">
+        <span class="block font-serif text-4xl font-semibold text-sage-deep">4</span>
+        <span class="text-xs font-semibold tracking-widest uppercase text-secondary">Trung tâm</span>
+      </div>
+      <div class="snap-center shrink-0 text-center min-w-[120px]">
+        <span class="block font-serif text-4xl font-semibold text-sage-deep">40+</span>
+        <span class="text-xs font-semibold tracking-widest uppercase text-secondary">HLV chuyên nghiệp</span>
+      </div>
+      <div class="snap-center shrink-0 text-center min-w-[120px]">
+        <span class="block font-serif text-4xl font-semibold text-sage-deep">1,000+</span>
+        <span class="text-xs font-semibold tracking-widest uppercase text-secondary">Lớp học / tuần</span>
+      </div>
+      <div class="snap-center shrink-0 text-center min-w-[120px]">
+        <span class="block font-serif text-4xl font-semibold text-sage-deep">2,000+</span>
+        <span class="text-xs font-semibold tracking-widest uppercase text-secondary">Hội viên</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Why Jee Pilates ──────────────────────────────────────── -->
+  <section class="py-20 md:py-28 px-6 bg-surface">
+    <div class="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <!-- Image -->
+      <div class="w-full aspect-[4/3] md:aspect-square rounded-2xl overflow-hidden shadow-xl order-1 md:order-none">
+        <img src="images/650x650-21.jpg" alt="Không gian Jee Pilates" class="w-full h-full object-cover"/>
+      </div>
+      <!-- Content -->
+      <div class="space-y-8">
+        <div>
+          <p class="text-xs font-semibold tracking-[0.15em] uppercase text-secondary mb-3">Vì sao chọn Jee?</p>
+          <h2 class="font-serif text-3xl md:text-4xl font-semibold text-sage-deep leading-snug">Sự Cân Bằng<br>Hoàn Hảo</h2>
+        </div>
+        <p class="text-on-surface-variant leading-relaxed">
+          Thành lập từ 2022, Jee Pilates đã đồng hành cùng gần 2,000 hội viên. Mỗi lộ trình được thiết kế theo thể trạng và mục tiêu riêng, giúp cải thiện linh hoạt, tăng sức mạnh lõi và giữ dáng bền vững.
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl border border-warm-sand bg-white/50 space-y-2">
+            <span class="material-symbols-outlined text-sage-deep">location_on</span>
+            <h4 class="text-xs font-semibold tracking-widest uppercase text-sage-deep">Tiện lợi</h4>
+            <p class="text-xs text-on-surface-variant">Vị trí trung tâm thuận tiện di chuyển.</p>
+          </div>
+          <div class="p-4 rounded-xl border border-warm-sand bg-white/50 space-y-2">
+            <span class="material-symbols-outlined text-sage-deep">verified</span>
+            <h4 class="text-xs font-semibold tracking-widest uppercase text-sage-deep">Chuyên gia</h4>
+            <p class="text-xs text-on-surface-variant">Đội ngũ HLV chứng chỉ quốc tế.</p>
+          </div>
+          <div class="p-4 rounded-xl border border-warm-sand bg-white/50 space-y-2">
+            <span class="material-symbols-outlined text-sage-deep">payments</span>
+            <h4 class="text-xs font-semibold tracking-widest uppercase text-sage-deep">Chi phí tối ưu</h4>
+            <p class="text-xs text-on-surface-variant">Đa dạng gói tập phù hợp ngân sách.</p>
+          </div>
+          <div class="p-4 rounded-xl border border-warm-sand bg-white/50 space-y-2">
+            <span class="material-symbols-outlined text-sage-deep">calendar_month</span>
+            <h4 class="text-xs font-semibold tracking-widest uppercase text-sage-deep">Linh hoạt</h4>
+            <p class="text-xs text-on-surface-variant">Lịch học đa dạng, dễ sắp xếp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Packages ─────────────────────────────────────────────── -->
+  <section class="py-20 md:py-28 bg-surface-container-high px-6" id="packages">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-secondary mb-3">Gói tập luyện</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-sage-deep">Lựa Chọn Gói Tập</h2>
+        <p class="text-on-surface-variant mt-3">Bắt đầu hành trình chuyển hóa cơ thể ngay hôm nay</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Group Class -->
+        <div class="bg-surface p-8 rounded-2xl border border-warm-sand transition-all hover:shadow-lg hover:-translate-y-1">
+          <h3 class="font-serif text-2xl font-semibold text-sage-deep mb-2">Group Class</h3>
+          <div class="flex items-baseline gap-1 mb-6">
+            <span class="text-3xl font-bold text-on-surface">186K</span>
+            <span class="text-on-surface-variant text-sm">/buổi</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-sm text-on-surface-variant">
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg">check_circle</span> Lớp nhóm tối đa 8 người</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg">check_circle</span> Lịch học linh hoạt 7/7</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg">check_circle</span> Phòng tập đầy đủ thiết bị</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg">check_circle</span> Theo dõi tiến trình cơ bản</li>
+          </ul>
+          <a href="#trial" class="block w-full border border-sage-deep text-sage-deep py-3 rounded-full text-xs font-semibold tracking-widest uppercase text-center hover:bg-sage-deep hover:text-white transition-all">Đăng ký thử</a>
+        </div>
+
+        <!-- Most Popular -->
+        <div class="bg-sage-deep p-8 rounded-2xl shadow-xl relative overflow-hidden hover:-translate-y-1 transition-transform">
+          <div class="absolute top-5 right-[-28px] bg-soft-clay text-white px-10 py-1 rotate-45 text-[9px] font-bold uppercase tracking-widest">Phổ biến</div>
+          <h3 class="font-serif text-2xl font-semibold text-white mb-2">Nhóm Nhỏ</h3>
+          <div class="flex items-baseline gap-1 mb-6">
+            <span class="text-3xl font-bold text-white">320K</span>
+            <span class="text-white/80 text-sm">/buổi</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-sm text-white/90">
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-lg">check_circle</span> Nhóm nhỏ 2–4 học viên</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-lg">check_circle</span> HLV chỉnh sửa kỹ thuật riêng</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-lg">check_circle</span> Lộ trình bán cá nhân hóa</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-lg">check_circle</span> Báo cáo tiến trình định kỳ</li>
+          </ul>
+          <a href="#trial" class="block w-full bg-white text-sage-deep py-3 rounded-full text-xs font-semibold tracking-widest uppercase text-center hover:opacity-90 transition-opacity">Đăng ký thử</a>
+        </div>
+
+        <!-- PT 1-1 -->
+        <div class="bg-surface p-8 rounded-2xl border border-warm-sand transition-all hover:shadow-lg hover:-translate-y-1">
+          <h3 class="font-serif text-2xl font-semibold text-sage-deep mb-2">PT 1-1</h3>
+          <div class="flex items-baseline gap-1 mb-6">
+            <span class="text-3xl font-bold text-on-surface">650K</span>
+            <span class="text-on-surface-variant text-sm">/buổi</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-sm text-on-surface-variant">
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg">check_circle</span> 1 học viên – 1 huấn luyện viên</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg">check_circle</span> Lộ trình hoàn toàn cá nhân hóa</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg">check_circle</span> Đánh giá thể trạng chuyên sâu</li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg">check_circle</span> Linh hoạt giờ học theo lịch riêng</li>
+          </ul>
+          <a href="#trial" class="block w-full border border-sage-deep text-sage-deep py-3 rounded-full text-xs font-semibold tracking-widest uppercase text-center hover:bg-sage-deep hover:text-white transition-all">Đăng ký thử</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Locations ────────────────────────────────────────────── -->
+  <section class="py-20 md:py-28 px-6 bg-surface" id="studios">
+    <div class="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+      <div>
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-secondary mb-3">Hệ thống phòng tập</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-sage-deep mb-8">Chi Nhánh Jee Pilates</h2>
+        <div class="space-y-5">
+          <div class="border-b border-warm-sand pb-5">
+            <div class="flex justify-between items-start">
+              <div>
+                <h5 class="font-semibold text-sage-deep">Jee Hoàng Văn Thụ</h5>
+                <p class="text-sm text-on-surface-variant mt-1">159/4 Hoàng Văn Thụ, Phú Nhuận, TP.HCM</p>
+              </div>
+              <a href="https://maps.app.goo.gl/YYiep1HcV16jFx1s9" target="_blank" rel="noopener" class="text-sage-deep flex items-center gap-1 text-xs font-semibold shrink-0 ml-4 hover:opacity-70 transition-opacity">
+                Chỉ đường <span class="material-symbols-outlined text-sm">open_in_new</span>
+              </a>
+            </div>
+          </div>
+          <div class="border-b border-warm-sand pb-5">
+            <div class="flex justify-between items-start">
+              <div>
+                <h5 class="font-semibold text-sage-deep">Jee Ngô Đức Kế</h5>
+                <p class="text-sm text-on-surface-variant mt-1">40E Ngô Đức Kế, Quận 1, TP.HCM</p>
+              </div>
+              <a href="https://maps.app.goo.gl/ro2mGaniPz5YNwwz7" target="_blank" rel="noopener" class="text-sage-deep flex items-center gap-1 text-xs font-semibold shrink-0 ml-4 hover:opacity-70 transition-opacity">
+                Chỉ đường <span class="material-symbols-outlined text-sm">open_in_new</span>
+              </a>
+            </div>
+          </div>
+          <div class="border-b border-warm-sand pb-5">
+            <div class="flex justify-between items-start">
+              <div>
+                <h5 class="font-semibold text-sage-deep">Jee Lê Quang Định</h5>
+                <p class="text-sm text-on-surface-variant mt-1">488A Lê Quang Định, Bình Thạnh, TP.HCM</p>
+              </div>
+              <a href="https://maps.app.goo.gl/mH8aoU75zHq7tjEbA" target="_blank" rel="noopener" class="text-sage-deep flex items-center gap-1 text-xs font-semibold shrink-0 ml-4 hover:opacity-70 transition-opacity">
+                Chỉ đường <span class="material-symbols-outlined text-sm">open_in_new</span>
+              </a>
+            </div>
+          </div>
+          <div class="border-b border-warm-sand pb-5">
+            <div class="flex justify-between items-start">
+              <div>
+                <h5 class="font-semibold text-sage-deep">Jee Nguyễn Phúc Nguyên</h5>
+                <p class="text-sm text-on-surface-variant mt-1">149A Nguyễn Phúc Nguyên, Quận 3, TP.HCM</p>
+              </div>
+              <a href="https://maps.app.goo.gl/WTxYQ3hkwhpvVUpL9" target="_blank" rel="noopener" class="text-sage-deep flex items-center gap-1 text-xs font-semibold shrink-0 ml-4 hover:opacity-70 transition-opacity">
+                Chỉ đường <span class="material-symbols-outlined text-sm">open_in_new</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Map image / grid -->
+      <div class="grid grid-cols-2 gap-3">
+        <img src="images/420x300-1.jpg" alt="Chi nhánh 1" class="w-full rounded-2xl object-cover aspect-[4/3]"/>
+        <img src="images/420x300-2.jpg" alt="Chi nhánh 2" class="w-full rounded-2xl object-cover aspect-[4/3]"/>
+        <img src="images/420x300-3.jpg" alt="Chi nhánh 3" class="w-full rounded-2xl object-cover aspect-[4/3]"/>
+        <img src="images/420x300-4.jpg" alt="Chi nhánh 4" class="w-full rounded-2xl object-cover aspect-[4/3]"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Gallery ──────────────────────────────────────────────── -->
+  <section class="py-20 md:py-28 px-6 bg-surface-container-low" id="gallery">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="mb-10">
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-secondary mb-3">Không gian tập luyện</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-sage-deep">Rộng rãi, tinh tế,<br>tiêu chuẩn quốc tế</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        <img src="images/650x650-21.jpg" alt="Không gian phòng tập 1" class="w-full aspect-square object-cover rounded-2xl hover:scale-[1.02] transition-transform cursor-pointer"/>
+        <img src="images/650x650-22.jpg" alt="Không gian phòng tập 2" class="w-full aspect-square object-cover rounded-2xl hover:scale-[1.02] transition-transform cursor-pointer"/>
+        <img src="images/650x650-23.jpg" alt="Không gian phòng tập 3" class="w-full aspect-square object-cover rounded-2xl hover:scale-[1.02] transition-transform cursor-pointer"/>
+        <img src="images/650x650-24.jpg" alt="Không gian phòng tập 4" class="w-full aspect-square object-cover rounded-2xl hover:scale-[1.02] transition-transform cursor-pointer"/>
+        <img src="images/650x650-25.jpg" alt="Không gian phòng tập 5" class="w-full aspect-square object-cover rounded-2xl hover:scale-[1.02] transition-transform cursor-pointer"/>
+        <img src="images/650x650-26.jpg" alt="Không gian phòng tập 6" class="w-full aspect-square object-cover rounded-2xl hover:scale-[1.02] transition-transform cursor-pointer"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Testimonials ─────────────────────────────────────────── -->
+  <section class="relative py-20 md:py-28 px-6 overflow-hidden bg-surface">
+    <div class="absolute inset-0 z-0 opacity-[0.06] grayscale pointer-events-none">
+      <img src="images/650x650-22.jpg" alt="" class="w-full h-full object-cover"/>
+    </div>
+    <div class="relative z-10 max-w-screen-xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-secondary mb-3">Học viên nói gì</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-sage-deep">Hơn 2,000 người đã thay đổi</h2>
+      </div>
+      <div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-5 md:grid md:grid-cols-3 md:overflow-visible">
+        <div class="snap-center shrink-0 w-[85vw] md:w-auto bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-warm-sand shadow-sm">
+          <p class="italic text-on-surface-variant mb-6 leading-relaxed">"Sau 3 tháng tập tại Jee Pilates, đau lưng mãn tính của tôi giảm rõ rệt. Tôi được dạy rất kỹ về tư thế và cách thở đúng."</p>
+          <div>
+            <span class="block font-semibold text-sage-deep">Nguyễn Thị Lan Anh</span>
+            <span class="text-xs text-secondary">Kế toán, 34 tuổi · Hội viên 2 năm</span>
+          </div>
+        </div>
+        <div class="snap-center shrink-0 w-[85vw] md:w-auto bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-warm-sand shadow-sm">
+          <p class="italic text-on-surface-variant mb-6 leading-relaxed">"HLV ở đây rất có tâm, hướng dẫn tỉ mỉ từng hơi thở. Mình giảm được 4cm vòng eo chỉ sau 1 tháng tập Small Group."</p>
+          <div>
+            <span class="block font-semibold text-sage-deep">Trần Phương Thảo</span>
+            <span class="text-xs text-secondary">Marketing Manager, 29 tuổi · Hội viên 6 tháng</span>
+          </div>
+        </div>
+        <div class="snap-center shrink-0 w-[85vw] md:w-auto bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-warm-sand shadow-sm">
+          <p class="italic text-on-surface-variant mb-6 leading-relaxed">"Huấn luyện viên tận tâm, cơ sở sạch sẽ và sang trọng. Không gian tập giúp mình quên hết stress sau một ngày dài."</p>
+          <div>
+            <span class="block font-semibold text-sage-deep">Lê Hoàng Mai</span>
+            <span class="text-xs text-secondary">Bác sĩ, 41 tuổi · Hội viên 1 năm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Trial Form ───────────────────────────────────────────── -->
+  <section class="py-20 md:py-28 px-6 bg-warm-sand/30" id="trial">
+    <div class="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <!-- Left copy -->
+      <div class="space-y-4">
+        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-secondary">Đăng ký trải nghiệm</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-sage-deep leading-snug">Nhận ngay 1 buổi<br>tập thử miễn phí</h2>
+        <p class="text-on-surface-variant leading-relaxed">
+          Điền thông tin để đội ngũ tư vấn liên hệ và thiết kế lộ trình phù hợp với thể trạng, mục tiêu và lịch sinh hoạt của bạn.
+        </p>
+        <div class="pt-4 space-y-2 text-sm">
+          <p><span class="font-semibold text-sage-deep">Hotline:</span> <a href="tel:02844556886" class="hover:underline">028 4455 6886</a></p>
+          <p><span class="font-semibold text-sage-deep">Email:</span> <a href="mailto:cskh@jeepilates.vn" class="hover:underline">cskh@jeepilates.vn</a></p>
+          <p><span class="font-semibold text-sage-deep">Zalo:</span> Jee Pilates</p>
+        </div>
+      </div>
+      <!-- Form -->
+      <div class="bg-white p-8 rounded-3xl shadow-lg">
+        <form class="space-y-5" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã quan tâm! Jee sẽ liên hệ sớm.');">
+          <div>
+            <label class="text-xs font-semibold tracking-widest uppercase text-sage-deep block mb-2">Họ và tên</label>
+            <input class="w-full bg-surface-container border-none focus:ring-1 focus:ring-sage-deep rounded-xl py-3 px-4 text-sm" placeholder="Nhập họ và tên" type="text" required/>
+          </div>
+          <div>
+            <label class="text-xs font-semibold tracking-widest uppercase text-sage-deep block mb-2">Số điện thoại</label>
+            <input class="w-full bg-surface-container border-none focus:ring-1 focus:ring-sage-deep rounded-xl py-3 px-4 text-sm" placeholder="0xxx xxx xxx" type="tel" required/>
+          </div>
+          <div>
+            <label class="text-xs font-semibold tracking-widest uppercase text-sage-deep block mb-2">Cơ sở quan tâm</label>
+            <select class="w-full bg-surface-container border-none focus:ring-1 focus:ring-sage-deep rounded-xl py-3 px-4 text-sm">
+              <option value="">Chọn cơ sở</option>
+              <option>Jee Hoàng Văn Thụ</option>
+              <option>Jee Ngô Đức Kế</option>
+              <option>Jee Lê Quang Định</option>
+              <option>Jee Nguyễn Phúc Nguyên</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs font-semibold tracking-widest uppercase text-sage-deep block mb-2">Ghi chú</label>
+            <textarea class="w-full bg-surface-container border-none focus:ring-1 focus:ring-sage-deep rounded-xl py-3 px-4 text-sm" rows="3" placeholder="Mục tiêu tập luyện của bạn"></textarea>
+          </div>
+          <button class="w-full bg-sage-deep text-white py-4 rounded-full text-xs font-semibold tracking-widest uppercase shadow-lg hover:opacity-90 active:scale-95 transition-all" type="submit">
+            Gửi Yêu Cầu
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Articles ─────────────────────────────────────────────── -->
+  <section class="py-20 md:py-28 px-6 bg-surface">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="flex items-end justify-between mb-10">
+        <div>
+          <p class="text-xs font-semibold tracking-[0.15em] uppercase text-secondary mb-3">Kiến thức tập luyện</p>
+          <h2 class="font-serif text-3xl md:text-4xl font-semibold text-sage-deep">Bài viết nổi bật</h2>
+        </div>
+        <a href="news.html" class="text-sm text-sage-deep font-semibold hover:opacity-70 transition-opacity whitespace-nowrap">Xem tất cả →</a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="group bg-white rounded-2xl border border-warm-sand overflow-hidden hover:shadow-lg transition-shadow">
+          <div class="overflow-hidden aspect-[16/9]">
+            <img src="images/560x360-41.jpg" alt="Pilates cho người mới" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+          </div>
+          <div class="p-6 space-y-3">
+            <p class="text-xs font-semibold tracking-widest uppercase text-secondary">Tin tức</p>
+            <h3 class="font-serif text-lg font-semibold text-sage-deep leading-snug">
+              <a href="article.html?slug=pilates-nguoi-moi" class="hover:opacity-70 transition-opacity">Pilates cho người mới bắt đầu — Bí quyết sống khỏe mỗi ngày</a>
+            </h3>
+            <p class="text-sm text-on-surface-variant">Gợi ý lộ trình nhập môn giúp cải thiện tư thế và sức bền an toàn.</p>
+            <a href="article.html?slug=pilates-nguoi-moi" class="inline-flex items-center text-sm font-semibold text-sage-deep gap-1 hover:gap-2 transition-all">
+              Đọc tiếp <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </article>
+        <article class="group bg-white rounded-2xl border border-warm-sand overflow-hidden hover:shadow-lg transition-shadow">
+          <div class="overflow-hidden aspect-[16/9]">
+            <img src="images/560x360-42.jpg" alt="Sức khỏe Gen Z" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+          </div>
+          <div class="p-6 space-y-3">
+            <p class="text-xs font-semibold tracking-widest uppercase text-secondary">Tin tức</p>
+            <h3 class="font-serif text-lg font-semibold text-sage-deep leading-snug">
+              <a href="article.html?slug=suc-khoe-gen-z" class="hover:opacity-70 transition-opacity">Sức khỏe Gen Z — Giải pháp đến từ Pilates</a>
+            </h3>
+            <p class="text-sm text-on-surface-variant">Một phương pháp tập luyện thông minh cho nhịp sống hiện đại.</p>
+            <a href="article.html?slug=suc-khoe-gen-z" class="inline-flex items-center text-sm font-semibold text-sage-deep gap-1 hover:gap-2 transition-all">
+              Đọc tiếp <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </article>
+        <article class="group bg-white rounded-2xl border border-warm-sand overflow-hidden hover:shadow-lg transition-shadow">
+          <div class="overflow-hidden aspect-[16/9]">
+            <img src="images/560x360-43.jpg" alt="Pilates giảm stress" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+          </div>
+          <div class="p-6 space-y-3">
+            <p class="text-xs font-semibold tracking-widest uppercase text-secondary">Tin tức</p>
+            <h3 class="font-serif text-lg font-semibold text-sage-deep leading-snug">
+              <a href="article.html?slug=pilates-stress" class="hover:opacity-70 transition-opacity">Pilates giúp giảm stress và phục hồi năng lượng như thế nào?</a>
+            </h3>
+            <p class="text-sm text-on-surface-variant">Kết hợp nhịp thở và chuyển động để cải thiện sức khỏe tinh thần.</p>
+            <a href="article.html?slug=pilates-stress" class="inline-flex items-center text-sm font-semibold text-sage-deep gap-1 hover:gap-2 transition-all">
+              Đọc tiếp <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ───────────────────────────────────────────────── -->
+<footer class="bg-surface-container border-t border-warm-sand">
+  <div class="max-w-screen-xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-10">
+    <div class="space-y-4">
+      <h2 class="font-serif text-2xl font-semibold text-sage-deep">Jee Pilates</h2>
+      <p class="text-sm text-on-surface-variant leading-relaxed">
+        Hệ thống Pilates cá nhân hóa hàng đầu TP.HCM.<br>
+        © 2024 Jee Pilates Studio.
+      </p>
+      <div class="flex gap-4">
+        <a href="https://facebook.com/jeepilates" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-warm-sand flex items-center justify-center hover:bg-sage-deep hover:text-white transition-colors text-on-surface-variant" aria-label="Facebook">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://instagram.com/jee.pilates" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-warm-sand flex items-center justify-center hover:bg-sage-deep hover:text-white transition-colors text-on-surface-variant" aria-label="Instagram">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://tiktok.com/@jeepilates" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-warm-sand flex items-center justify-center hover:bg-sage-deep hover:text-white transition-colors text-on-surface-variant" aria-label="TikTok">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="space-y-3">
+      <h4 class="text-xs font-semibold tracking-widest uppercase text-sage-deep mb-4">Liên hệ</h4>
+      <p class="text-sm text-on-surface-variant">Hotline: <a href="tel:02844556886" class="hover:text-sage-deep">028 4455 6886</a></p>
+      <p class="text-sm text-on-surface-variant">Email: <a href="mailto:cskh@jeepilates.vn" class="hover:text-sage-deep">cskh@jeepilates.vn</a></p>
+      <p class="text-sm text-on-surface-variant">Zalo: Jee Pilates</p>
+    </div>
+    <div class="space-y-3">
+      <h4 class="text-xs font-semibold tracking-widest uppercase text-sage-deep mb-4">Liên kết nhanh</h4>
+      <ul class="space-y-2">
+        <li><a href="#about"   class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Giới thiệu</a></li>
+        <li><a href="#packages" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Gói tập</a></li>
+        <li><a href="#studios" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Phòng tập</a></li>
+        <li><a href="news.html" class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Tin tức</a></li>
+        <li><a href="#trial"   class="text-sm text-on-surface-variant hover:text-sage-deep transition-colors">Đăng ký tập thử</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- ── Floating Call Button ──────────────────────────────────── -->
+<a href="tel:02844556886" class="fixed bottom-6 right-6 w-14 h-14 bg-sage-deep text-white rounded-full flex items-center justify-center shadow-2xl z-40 active:scale-90 hover:opacity-90 transition-all" aria-label="Gọi ngay">
+  <span class="material-symbols-outlined">call</span>
+</a>
+
+<script>
+  const drawer   = document.getElementById('mobileDrawer');
+  const backdrop = document.getElementById('drawerBackdrop');
+
+  function openNav() {
+    drawer.classList.remove('drawer-closed');
+    drawer.removeAttribute('aria-hidden');
+    backdrop.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    // Stagger-animate each nav item
+    drawer.querySelectorAll('.nav-item-transition').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateX(-20px)';
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateX(0)';
+      }, 80 + i * 55);
+    });
+  }
+
+  function closeNav() {
+    drawer.classList.add('drawer-closed');
+    drawer.setAttribute('aria-hidden', 'true');
+    backdrop.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  function toggleSubmenu(id) {
+    const submenu  = document.getElementById(id);
+    const iconMap  = { 'goiTapMenu': 'goiTapIcon' };
+    const icon     = document.getElementById(iconMap[id]);
+    const isOpen   = submenu.classList.contains('submenu-open');
+    submenu.classList.toggle('submenu-open', !isOpen);
+    if (icon) icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+  }
+
+  // Close drawer on Escape key
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+</script>
+</body>
 </html>

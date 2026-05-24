@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jee Pilates | Pilates: Đẹp hơn, Khỏe hơn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#fbf9f7",
+                    "charcoal-silk": "#2D2D2D",
+                    "soft-clay": "#B5A496",
+                    "secondary": "#685c53",
+                    "on-primary-fixed-variant": "#394b3b",
+                    "on-secondary-container": "#6e6258",
+                    "background": "#fbf9f7",
+                    "inverse-surface": "#30302f",
+                    "secondary-fixed-dim": "#d3c4b8",
+                    "surface-dim": "#dbdad8",
+                    "on-secondary-fixed": "#221a13",
+                    "surface-container-high": "#eae8e6",
+                    "surface-container": "#efedec",
+                    "on-surface-variant": "#434843",
+                    "on-primary-container": "#f6fff4",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#c3c8c0",
+                    "surface-tint": "#506352",
+                    "surface-variant": "#e4e2e0",
+                    "sage-deep": "#4A5D4C",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#f9ffed",
+                    "on-tertiary-fixed-variant": "#3f4a36",
+                    "surface-container-low": "#f5f3f1",
+                    "surface": "#fbf9f7",
+                    "error": "#ba1a1a",
+                    "on-background": "#1b1c1b",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#b7ccb7",
+                    "secondary-container": "#f0e0d3",
+                    "tertiary-container": "#6d7862",
+                    "on-tertiary-fixed": "#151e0e",
+                    "on-primary-fixed": "#0e1f12",
+                    "inverse-on-surface": "#f2f0ee",
+                    "on-surface": "#1b1c1b",
+                    "outline": "#737872",
+                    "tertiary-fixed-dim": "#becbb1",
+                    "warm-sand": "#EAE3DB",
+                    "tertiary-fixed": "#dae7cc",
+                    "primary": "#4d6150",
+                    "on-secondary-fixed-variant": "#4f453c",
+                    "secondary-fixed": "#f0e0d3",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e4e2e0",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#d2e8d3",
+                    "primary-container": "#667a68",
+                    "tertiary": "#545f4a",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#b7ccb7",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap-mobile": "4rem",
+                    "stack-sm": "0.5rem",
+                    "stack-lg": "3rem",
+                    "gutter": "1.5rem",
+                    "stack-md": "1.5rem",
+                    "container-max": "1280px",
+                    "section-gap": "8rem"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Playfair Display"],
+                    "display-hero": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "label-caps": ["0.75rem", {"lineHeight": "1.5", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["2.25rem", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "body-lg": ["1.125rem", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "headline-lg": ["3rem", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "body-md": ["1rem", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["2rem", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "display-hero": ["4.5rem", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .hero-gradient { background: linear-gradient(to bottom, rgba(74, 93, 76, 0.4), rgba(251, 249, 247, 1)); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center px-gutter py-4 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sage-deep dark:text-primary-fixed" data-icon="menu">menu</span>
+<h1 class="font-headline-md text-headline-md text-sage-deep dark:text-primary-fixed leading-none">Jee Pilates</h1>
+</div>
+<button class="bg-sage-deep text-white px-6 py-2 rounded-full font-label-caps text-label-caps hover:opacity-80 transition-opacity active:scale-95 duration-200">
+                Book Now
+            </button>
+</div>
+</header>
+<main class="pt-16">
+<!-- Section 1: Hero -->
+<section class="relative min-h-[85vh] flex flex-col justify-end px-gutter pb-section-gap-mobile overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Serene Pilates Space" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ujLSHqBG87Zlr8ImLxnXlWHnwIfsP8IvBM9_ADCgYyxoAF6P4bsj8wcj_0TDhUwWV1HHULn861_lVll53k8ah1xtObrRhvA-YwStVMrYSv6a_eW-B_dmfUfknyqK4R4kz6rp-Jl0EzycxKb51pdktWs5MkIseGwwcRjLyoQ8fdRx2UzWGIN8dUOMXtT6NOnIqeX6A9W03uD4MxmnDmu812Cd9AxnzTKArWYxBBZ71gzAOXfYq1IwjWvsw"/>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 space-y-stack-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-sage-deep max-w-[80%]">Pilates: Đẹp hơn, Khỏe hơn.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Hệ thống Pilates cá nhân hóa hàng đầu TP.HCM.</p>
+<div class="pt-4">
+<button class="w-full bg-sage-deep text-white py-4 rounded-full font-label-caps text-label-caps shadow-lg active:scale-95 transition-transform">
+                        Đăng ký tập thử miễn phí
+                    </button>
+</div>
+</div>
+</section>
+<!-- Section 2: Key Stats -->
+<section class="py-12 bg-surface-container-low border-y border-warm-sand">
+<div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory px-gutter gap-8 items-center">
+<div class="snap-center shrink-0 text-center min-w-[120px]">
+<span class="block font-headline-md text-headline-md text-sage-deep">4</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">Trung tâm</span>
+</div>
+<div class="snap-center shrink-0 text-center min-w-[120px]">
+<span class="block font-headline-md text-headline-md text-sage-deep">40+</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">HLV chuyên nghiệp</span>
+</div>
+<div class="snap-center shrink-0 text-center min-w-[120px]">
+<span class="block font-headline-md text-headline-md text-sage-deep">1,000+</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">Lớp học/tháng</span>
+</div>
+<div class="snap-center shrink-0 text-center min-w-[120px]">
+<span class="block font-headline-md text-headline-md text-sage-deep">2,000+</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">Hội viên</span>
+</div>
+</div>
+</section>
+<!-- Section 3: Why Jee Pilates -->
+<section class="py-section-gap-mobile px-gutter bg-surface">
+<div class="mb-stack-lg">
+<h3 class="font-headline-md text-headline-md text-sage-deep text-center mb-4">Sự Cân Bằng Hoàn Hảo</h3>
+<div class="w-full aspect-square rounded-2xl overflow-hidden mb-stack-md shadow-xl">
+<img alt="Symbolic Balance" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugvnDJrnOjg5_R4cpMf1QCU08ODLnpTBxGaOoQz4iMGJkcpU0P5m2kAD-J6tnrIX6nPi8l9v_Rz-0DMK-RF6SSYSjIXeGAWwEXzUKgPUt9xx9NxHDQRUfBEMVFU5uvLHkPWi78WsuFZvzWUCJXVzrf7sq3mgmlPdZWY-nMeGZkbbvmBT7aRhvVW159aFmyokFKtonOQBwLw_su0Wnxgq-4UGAOCDTY3NBBfd64-D5JO2sTRv30fk78qxoA"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-stack-md">
+<div class="p-4 rounded-xl border border-warm-sand bg-white/50 space-y-2">
+<span class="material-symbols-outlined text-sage-deep" data-icon="timer">timer</span>
+<h4 class="font-label-caps text-label-caps text-sage-deep">Tiện lợi</h4>
+<p class="text-xs text-on-surface-variant">Vị trí trung tâm thuận tiện di chuyển.</p>
+</div>
+<div class="p-4 rounded-xl border border-warm-sand bg-white/50 space-y-2">
+<span class="material-symbols-outlined text-sage-deep" data-icon="star">star</span>
+<h4 class="font-label-caps text-label-caps text-sage-deep">Chuyên gia</h4>
+<p class="text-xs text-on-surface-variant">Đội ngũ HLV chứng chỉ quốc tế.</p>
+</div>
+<div class="p-4 rounded-xl border border-warm-sand bg-white/50 space-y-2">
+<span class="material-symbols-outlined text-sage-deep" data-icon="payments">payments</span>
+<h4 class="font-label-caps text-label-caps text-sage-deep">Chi phí tối ưu</h4>
+<p class="text-xs text-on-surface-variant">Đa dạng gói tập phù hợp ngân sách.</p>
+</div>
+<div class="p-4 rounded-xl border border-warm-sand bg-white/50 space-y-2">
+<span class="material-symbols-outlined text-sage-deep" data-icon="calendar_month">calendar_month</span>
+<h4 class="font-label-caps text-label-caps text-sage-deep">Linh hoạt</h4>
+<p class="text-xs text-on-surface-variant">Đặt lịch dễ dàng qua ứng dụng.</p>
+</div>
+</div>
+</section>
+<!-- Section 4: Membership Gói tập -->
+<section class="py-section-gap-mobile bg-surface-container-high px-gutter">
+<div class="text-center mb-stack-lg">
+<h3 class="font-headline-md text-headline-md text-sage-deep">Lựa Chọn Gói Tập</h3>
+<p class="text-on-surface-variant mt-2">Bắt đầu hành trình chuyển hóa cơ thể ngay hôm nay</p>
+</div>
+<div class="space-y-stack-md">
+<!-- Group Card -->
+<div class="bg-surface p-6 rounded-2xl border border-warm-sand transition-all active:scale-[0.98]">
+<h4 class="font-headline-md text-headline-md text-sage-deep mb-1">Group Class</h4>
+<div class="flex items-baseline gap-1 mb-4">
+<span class="text-2xl font-bold text-on-surface">186K</span>
+<span class="text-on-surface-variant text-sm">/buổi</span>
+</div>
+<ul class="space-y-2 mb-6 text-sm text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg" data-icon="check_circle">check_circle</span> Tối đa 10 người</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg" data-icon="check_circle">check_circle</span> Đầy đủ thiết bị</li>
+</ul>
+<button class="w-full border border-sage-deep text-sage-deep py-3 rounded-full font-label-caps text-label-caps">Đăng ký thử</button>
+</div>
+<!-- Most Popular Card -->
+<div class="bg-sage-deep p-6 rounded-2xl border border-sage-deep shadow-xl relative overflow-hidden transition-all active:scale-[0.98]">
+<div class="absolute top-4 right-[-30px] bg-soft-clay text-white px-10 py-1 rotate-45 text-[10px] font-bold uppercase tracking-widest">Popular</div>
+<h4 class="font-headline-md text-headline-md text-white mb-1">Small Group</h4>
+<div class="flex items-baseline gap-1 mb-4">
+<span class="text-2xl font-bold text-white">320K</span>
+<span class="text-white/80 text-sm">/buổi</span>
+</div>
+<ul class="space-y-2 mb-6 text-sm text-white/90">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-lg" data-icon="check_circle">check_circle</span> Tối đa 4 người</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-lg" data-icon="check_circle">check_circle</span> HLV chỉnh sửa kĩ</li>
+</ul>
+<button class="w-full bg-white text-sage-deep py-3 rounded-full font-label-caps text-label-caps">Đăng ký thử</button>
+</div>
+<!-- PT 1-1 Card -->
+<div class="bg-surface p-6 rounded-2xl border border-warm-sand transition-all active:scale-[0.98]">
+<h4 class="font-headline-md text-headline-md text-sage-deep mb-1">PT 1-1</h4>
+<div class="flex items-baseline gap-1 mb-4">
+<span class="text-2xl font-bold text-on-surface">650K</span>
+<span class="text-on-surface-variant text-sm">/buổi</span>
+</div>
+<ul class="space-y-2 mb-6 text-sm text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg" data-icon="check_circle">check_circle</span> Giáo án riêng biệt</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sage-deep text-lg" data-icon="check_circle">check_circle</span> Tập trung mục tiêu cá nhân</li>
+</ul>
+<button class="w-full border border-sage-deep text-sage-deep py-3 rounded-full font-label-caps text-label-caps">Đăng ký thử</button>
+</div>
+</div>
+</section>
+<!-- Section 5: Locations -->
+<section class="py-section-gap-mobile px-gutter bg-surface">
+<h3 class="font-headline-md text-headline-md text-sage-deep mb-stack-lg">Chi Nhánh Jee Pilates</h3>
+<div class="space-y-4">
+<div class="group border-b border-warm-sand pb-4">
+<div class="flex justify-between items-center mb-1">
+<h5 class="font-body-lg font-semibold text-sage-deep">Jee Hoàng Văn Thụ</h5>
+<a class="text-sage-deep flex items-center gap-1 text-xs font-label-caps underline" href="#">Go to Store <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span></a>
+</div>
+<p class="text-sm text-on-surface-variant">300 Hoàng Văn Thụ, P.4, Tân Bình</p>
+</div>
+<div class="group border-b border-warm-sand pb-4">
+<div class="flex justify-between items-center mb-1">
+<h5 class="font-body-lg font-semibold text-sage-deep">Jee Ngô Đức Kế</h5>
+<a class="text-sage-deep flex items-center gap-1 text-xs font-label-caps underline" href="#">Go to Store <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span></a>
+</div>
+<p class="text-sm text-on-surface-variant">10 Ngô Đức Kế, Bến Nghé, Quận 1</p>
+</div>
+<div class="group border-b border-warm-sand pb-4">
+<div class="flex justify-between items-center mb-1">
+<h5 class="font-body-lg font-semibold text-sage-deep">Jee Lê Quang Định</h5>
+<a class="text-sage-deep flex items-center gap-1 text-xs font-label-caps underline" href="#">Go to Store <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span></a>
+</div>
+<p class="text-sm text-on-surface-variant">159 Lê Quang Định, P.7, Bình Thạnh</p>
+</div>
+<div class="group border-b border-warm-sand pb-4">
+<div class="flex justify-between items-center mb-1">
+<h5 class="font-body-lg font-semibold text-sage-deep">Jee Nguyễn Phúc Nguyên</h5>
+<a class="text-sage-deep flex items-center gap-1 text-xs font-label-caps underline" href="#">Go to Store <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span></a>
+</div>
+<p class="text-sm text-on-surface-variant">42 Nguyễn Phúc Nguyên, P.9, Quận 3</p>
+</div>
+</div>
+</section>
+<!-- Section 6: Testimonials -->
+<section class="relative py-section-gap-mobile px-gutter overflow-hidden">
+<div class="absolute inset-0 z-0 opacity-10 grayscale">
+<img alt="Rhythm and Control" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uh1RUE4hk1I-VyRjnib8oxw1oat6x9a0-fOM9HXH3IvnCqli6vkGCInOF3LIdrsqGovK42WZAj1PcP0ivMJJHGsLd9VMdN0k9vrhG1ii4UFFTYdx7g8yzCIjYpXVZqunufpysBapg5asMFtV_XF4AMJuWRSZtKkNMsSobswv30cf76zUKajOzGEI8XF7Dl24kTzy071j8HFegiLuVgEULzGgzsUBGmmvBd-0JRFZd84MFuBcWZ7Ulz13w"/>
+</div>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md text-sage-deep text-center mb-stack-lg">Cảm nhận từ Hội viên</h3>
+<div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-gutter">
+<div class="snap-center shrink-0 w-[85%] bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-warm-sand shadow-sm">
+<p class="italic text-on-surface-variant mb-6">"Từ khi tập tại Jee, mình không còn đau lưng và cảm thấy cơ thể dẻo dai hơn rất nhiều. Không gian tập cực kỳ chill."</p>
+<div>
+<span class="block font-semibold text-sage-deep">Nguyễn Thị Lan Anh</span>
+<span class="text-xs text-secondary">Hội viên 2 năm</span>
+</div>
+</div>
+<div class="snap-center shrink-0 w-[85%] bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-warm-sand shadow-sm">
+<p class="italic text-on-surface-variant mb-6">"HLV ở đây rất có tâm, hướng dẫn tỉ mỉ từng hơi thở. Mình giảm được 4cm vòng eo chỉ sau 1 tháng tập Small Group."</p>
+<div>
+<span class="block font-semibold text-sage-deep">Trần Phương Thảo</span>
+<span class="text-xs text-secondary">Hội viên 6 tháng</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: Lead Form -->
+<section class="py-section-gap-mobile px-gutter bg-warm-sand/30">
+<div class="bg-white p-8 rounded-3xl shadow-lg">
+<h3 class="font-headline-md text-headline-md text-sage-deep mb-2 text-center">Tư vấn miễn phí</h3>
+<p class="text-center text-on-surface-variant text-sm mb-8">Để lại thông tin, Jee sẽ liên hệ ngay!</p>
+<form class="space-y-stack-md" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã quan tâm! Jee sẽ liên hệ sớm.');">
+<div>
+<label class="font-label-caps text-label-caps text-sage-deep block mb-2">Họ và tên</label>
+<input class="w-full bg-surface-container border-none focus:ring-1 focus:ring-sage-deep rounded-lg py-3 px-4" placeholder="Nhập tên của bạn" type="text"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-sage-deep block mb-2">Số điện thoại</label>
+<input class="w-full bg-surface-container border-none focus:ring-1 focus:ring-sage-deep rounded-lg py-3 px-4" placeholder="0xxx xxx xxx" type="tel"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-sage-deep block mb-2">Cơ sở quan tâm</label>
+<select class="w-full bg-surface-container border-none focus:ring-1 focus:ring-sage-deep rounded-lg py-3 px-4">
+<option>Jee Hoàng Văn Thụ</option>
+<option>Jee Ngô Đức Kế</option>
+<option>Jee Lê Quang Định</option>
+<option>Jee Nguyễn Phúc Nguyên</option>
+</select>
+</div>
+<button class="w-full bg-sage-deep text-white py-4 rounded-full font-label-caps text-label-caps shadow-lg hover:opacity-90 active:scale-95 transition-all mt-4" type="submit">
+                        Gửi Yêu Cầu
+                    </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-container dark:bg-surface-container-high border-t border-warm-sand dark:border-outline-variant">
+<div class="flex flex-col gap-stack-md px-gutter py-section-gap-mobile items-center text-center w-full">
+<h2 class="font-headline-md text-headline-md text-sage-deep">Jee Pilates</h2>
+<nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+<a class="font-body-md text-body-md text-on-secondary-container dark:text-on-secondary-fixed-variant hover:text-sage-deep underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-secondary-container dark:text-on-secondary-fixed-variant hover:text-sage-deep underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-secondary-container dark:text-on-secondary-fixed-variant hover:text-sage-deep underline transition-all" href="#">FAQ</a>
+<a class="font-body-md text-body-md text-on-secondary-container dark:text-on-secondary-fixed-variant hover:text-sage-deep underline transition-all" href="#">Instagram</a>
+<a class="font-body-md text-body-md text-on-secondary-container dark:text-on-secondary-fixed-variant hover:text-sage-deep underline transition-all" href="#">Facebook</a>
+</nav>
+<p class="font-body-md text-body-md text-on-secondary-container/60 dark:text-on-secondary-fixed-variant/60 max-w-xs mt-4">
+                © 2024 Jee Pilates Studio. Tranquility in Motion.
+            </p>
+</div>
+</footer>
+<!-- Simple FAB for Mobile Context -->
+<button class="fixed bottom-6 right-6 w-14 h-14 bg-sage-deep text-white rounded-full flex items-center justify-center shadow-2xl z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="add_call">add_call</span>
+</button>
+</body></html>

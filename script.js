@@ -85,7 +85,7 @@ if (floatContact && floatToggle) {
   });
 }
 
-// ── Category filter tabs (tin-tuc page) ──────────────────
+// ── Category filter tabs (news page) ──────────────────
 const filterTabs = document.querySelectorAll(".filter-tab");
 const filterCards = document.querySelectorAll(".article-card[data-cat]");
 
@@ -100,7 +100,7 @@ if (filterTabs.length > 0) {
       tab.classList.add("is-active");
 
       const filter = tab.dataset.filter;
-      filterCards.forEach((card) => {
+      document.querySelectorAll(".article-card[data-cat]").forEach((card) => {
         const show = filter === "all" || card.dataset.cat === filter;
         card.style.display = show ? "" : "none";
         if (show) card.classList.add("visible");

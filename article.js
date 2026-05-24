@@ -2,119 +2,163 @@
   var params = new URLSearchParams(window.location.search);
   var slug = params.get('slug');
 
-  if (!slug || !ARTICLES[slug]) {
-    window.location.href = 'tin-tuc.html';
+  if (!slug) {
+    window.location.href = 'news.html';
     return;
   }
 
-  var art = ARTICLES[slug];
-
-  // Page title
-  document.title = art.title + ' – Jee Pilates';
-
-  // Breadcrumb
-  var crumbTitle = document.getElementById('articleBreadcrumbTitle');
-  if (crumbTitle) {
-    // Truncate long titles in breadcrumb
-    crumbTitle.textContent = art.title.length > 60 ? art.title.slice(0, 57) + '…' : art.title;
+  function getRelatedEntries(currentSlug, currentArticle, limit) {
+    return Object.entries(ARTICLES)
+      .filter(function (entry) { return entry[0] !== currentSlug; })
+      .sort(function (a, b) {
+        var aSameCategory = a[1].category === currentArticle.category ? 1 : 0;
+        var bSameCategory = b[1].category === currentArticle.category ? 1 : 0;
+        return bSameCategory - aSameCategory;
+      })
+      .slice(0, limit);
   }
 
-  // Meta (category tag + date)
-  var metaEl = document.getElementById('articleMeta');
-  if (metaEl) {
-    var tag = document.createElement('span');
-    tag.className = 'tag';
-    tag.textContent = art.category;
+  function renderArticle(art) {
+    document.title = art.title + ' – Jee Pilates';
 
-    var dateSpan = document.createElement('span');
-    dateSpan.className = 'article-date';
-    dateSpan.textContent = art.date;
+    var crumbTitle = document.getElementById('articleBreadcrumbTitle');
+    if (crumbTitle) {
+      crumbTitle.textContent = art.title.length > 60 ? art.title.slice(0, 57) + '…' : art.title;
+    }
 
-    metaEl.appendChild(tag);
-    metaEl.appendChild(dateSpan);
-  }
+    var metaEl = document.getElementById('articleMeta');
+    if (metaEl) {
+      metaEl.className = 'flex items-center gap-3 flex-wrap';
+      metaEl.innerHTML = '';
 
-  // Heading
-  var titleEl = document.getElementById('articleTitle');
-  if (titleEl) titleEl.textContent = art.title;
+      var tag = document.createElement('span');
+      tag.className = 'inline-block px-3 py-1 rounded-full bg-[#f0e0d3] text-xs font-semibold tracking-widest uppercase text-secondary';
+      tag.textContent = art.categoryLabel || art.category;
 
-  // Hero image
-  var heroImgEl = document.getElementById('articleHeroImg');
-  if (heroImgEl) {
-    var img = document.createElement('img');
-    img.src = art.img;
-    img.alt = art.title;
-    heroImgEl.appendChild(img);
-  }
+      var dateSpan = document.createElement('span');
+      dateSpan.className = 'text-sm text-on-surface-variant';
+      dateSpan.textContent = art.date;
 
-  // Article body
-  var bodyEl = document.getElementById('articleBody');
-  if (bodyEl) {
-    art.content.forEach(function (block) {
-      var el = document.createElement(block.type);
-      el.textContent = block.text;
-      bodyEl.appendChild(el);
-    });
-  }
+      metaEl.appendChild(tag);
+      metaEl.appendChild(dateSpan);
+    }
 
-  // Sidebar: quick links to other articles
-  var sidebarLinks = document.getElementById('sidebarLinks');
-  if (sidebarLinks) {
-    Object.entries(ARTICLES)
-      .filter(function (entry) { return entry[0] !== slug; })
-      .slice(0, 5)
-      .forEach(function (entry) {
+    var titleEl = document.getElementById('articleTitle');
+    if (titleEl) {
+      titleEl.textContent = art.title;
+    }
+
+    var heroImgEl = document.getElementById('articleHeroImg');
+    if (heroImgEl) {
+      heroImgEl.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = art.img;
+      img.alt = art.title;
+      img.className = 'w-full h-full max-h-[500px] object-cover object-center';
+      heroImgEl.appendChild(img);
+    }
+
+    var bodyEl = document.getElementById('articleBody');
+    if (bodyEl) {
+      bodyEl.innerHTML = '';
+      (Array.isArray(art.content) ? art.content : []).forEach(function (block) {
+        var el = document.createElement(block.type || 'p');
+        el.textContent = block.text || '';
+        bodyEl.appendChild(el);
+      });
+    }
+
+    var sidebarLinks = document.getElementById('sidebarLinks');
+    if (sidebarLinks) {
+      sidebarLinks.innerHTML = '';
+      getRelatedEntries(slug, art, 5).forEach(function (entry) {
         var key = entry[0];
-        var a = ARTICLES[key];
+        var linkedArticle = entry[1];
         var li = document.createElement('li');
+        li.className = 'border-b border-warm-sand pb-3 last:border-0 last:pb-0';
+
         var link = document.createElement('a');
         link.href = 'article.html?slug=' + key;
-        link.textContent = a.title;
+        link.className = 'text-sm text-on-surface-variant hover:text-sage-deep transition-colors line-clamp-2';
+        link.textContent = linkedArticle.title;
+
         li.appendChild(link);
         sidebarLinks.appendChild(li);
       });
-  }
+    }
 
-  // Related articles (3 cards)
-  var relatedEl = document.getElementById('relatedArticles');
-  if (relatedEl) {
-    Object.entries(ARTICLES)
-      .filter(function (entry) { return entry[0] !== slug; })
-      .slice(0, 3)
-      .forEach(function (entry) {
+    var relatedEl = document.getElementById('relatedArticles');
+    if (relatedEl) {
+      relatedEl.innerHTML = '';
+      getRelatedEntries(slug, art, 3).forEach(function (entry) {
         var key = entry[0];
-        var relArt = ARTICLES[key];
-        var thumbSrc = relArt.img.replace('1100/560', '560/360');
+        var relArt = entry[1];
+        var thumbSrc = (relArt.img || '').replace('1100x560', '560x360') || relArt.img;
 
         var card = document.createElement('article');
-        card.className = 'article-card reveal-item';
+        card.className = 'group bg-white rounded-2xl border border-warm-sand overflow-hidden hover:shadow-lg transition-shadow';
 
         var imgLink = document.createElement('a');
         imgLink.href = 'article.html?slug=' + key;
+        imgLink.className = 'block overflow-hidden aspect-[16/9]';
+
         var cardImg = document.createElement('img');
         cardImg.src = thumbSrc;
         cardImg.alt = relArt.title;
+        cardImg.className = 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500';
         imgLink.appendChild(cardImg);
 
+        var contentDiv = document.createElement('div');
+        contentDiv.className = 'p-6 space-y-3';
+
         var h3 = document.createElement('h3');
+        h3.className = 'font-serif text-lg font-semibold text-sage-deep leading-snug';
+
         var h3Link = document.createElement('a');
         h3Link.href = 'article.html?slug=' + key;
+        h3Link.className = 'hover:opacity-70 transition-opacity';
         h3Link.textContent = relArt.title;
         h3.appendChild(h3Link);
 
         var excerpt = document.createElement('p');
+        excerpt.className = 'text-sm text-on-surface-variant';
         excerpt.textContent = relArt.excerpt;
 
         var readMore = document.createElement('a');
         readMore.href = 'article.html?slug=' + key;
-        readMore.textContent = 'Đọc tiếp';
+        readMore.textContent = 'Đọc tiếp →';
+        readMore.className = 'inline-flex items-center text-sm font-semibold text-sage-deep gap-1 hover:gap-2 transition-all';
+
+        contentDiv.appendChild(h3);
+        contentDiv.appendChild(excerpt);
+        contentDiv.appendChild(readMore);
 
         card.appendChild(imgLink);
-        card.appendChild(h3);
-        card.appendChild(excerpt);
-        card.appendChild(readMore);
-
+        card.appendChild(contentDiv);
         relatedEl.appendChild(card);
       });
+    }
   }
+
+  if (ARTICLES[slug]) {
+    renderArticle(ARTICLES[slug]);
+    return;
+  }
+
+  if (typeof db === 'undefined') {
+    window.location.href = 'news.html';
+    return;
+  }
+
+  db.collection('articles').doc(slug).get()
+    .then(function (doc) {
+      if (doc.exists) {
+        renderArticle(doc.data());
+      } else {
+        window.location.href = 'news.html';
+      }
+    })
+    .catch(function () {
+      window.location.href = 'news.html';
+    });
 })();
